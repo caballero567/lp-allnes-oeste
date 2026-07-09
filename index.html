@@ -1052,21 +1052,26 @@
     // ===== ESTADO DE FILTRO =====
     let hayFiltro = false;
 
-    // ===== FUNCIÓN DE FILTRADO =====
+    // ===== FUNCIÓN DE FILTRADO MEJORADA =====
     function filterProducts() {
         const searchVal = searchInput.value.trim();
         const brandVal = brandSelect.value;
-        const normSearch = normalize(searchVal);
+
+        // Normalizar la búsqueda: eliminar tildes, caracteres especiales, y tokenizar
+        const normalizedSearch = normalize(searchVal);
+        const searchTokens = normalizedSearch.split(/\s+/).filter(t => t.length > 0);
 
         const filtered = productos.filter(p => {
+            // Filtro por línea
             if (brandVal && p.linea !== brandVal) return false;
-            if (searchVal !== '') {
-                const normLinea = normalize(p.linea);
-                const normDesc = normalize(p.descripcion);
-                const normLote = normalize(p.lote);
-                return normLinea.includes(normSearch) || normDesc.includes(normSearch) || normLote.includes(normSearch);
-            }
-            return true;
+
+            // Si no hay búsqueda, incluir todos
+            if (searchTokens.length === 0) return true;
+
+            // Preparar el texto del producto (línea + descripción + lote) normalizado
+            const productText = normalize(p.linea + ' ' + p.descripcion + ' ' + p.lote);
+            // Verificar que todos los tokens de búsqueda estén en el texto del producto
+            return searchTokens.every(token => productText.includes(token));
         });
 
         // Determinar si hay filtro activo
