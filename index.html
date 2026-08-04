@@ -2540,7 +2540,7 @@
 
     let hayFiltro = false;
 
-    // ===== FILTRADO DE LOTES =====
+    // ===== FILTRADO DE LOTES (busca también en el nombre del precio) =====
     function filterProducts() {
         const searchVal = searchInput.value.trim();
         const brandVal = brandSelect.value;
@@ -2548,10 +2548,25 @@
         const normalizedSearch = normalize(searchVal);
         const searchTokens = normalizedSearch.split(/\s+/).filter(t => t.length > 0);
 
+        // Mapa: código del precio -> nombre del producto
+        const precioMap = {};
+        precios.forEach(pr => {
+            precioMap[pr.codigo] = pr.nombre;
+        });
+
         const filtered = productos.filter(p => {
             if (brandVal && p.linea !== brandVal) return false;
             if (searchTokens.length === 0) return true;
-            const productText = normalize(p.linea + ' ' + p.descripcion + ' ' + p.lote);
+
+            // Texto base: línea + código + lote
+            let productText = normalize(p.linea + ' ' + p.descripcion + ' ' + p.lote);
+
+            // Si existe un precio con este código, añadimos su nombre a la búsqueda
+            const nombrePrecio = precioMap[p.descripcion];
+            if (nombrePrecio) {
+                productText += ' ' + normalize(nombrePrecio);
+            }
+
             return searchTokens.every(token => productText.includes(token));
         });
 
@@ -2563,7 +2578,7 @@
         resultCounter.textContent = filtered.length;
     }
 
-    // ===== RENDER TARJETAS (con precio si existe) =====
+    // ===== RENDER TARJETAS (muestra el precio correctamente) =====
     function renderCards(list) {
         if (list.length === 0) {
             cardList.innerHTML = `
@@ -2575,6 +2590,12 @@
             return;
         }
 
+        // Mapa: código -> precio (numérico)
+        const precioMap = {};
+        precios.forEach(pr => {
+            precioMap[pr.codigo] = pr.precio;
+        });
+
         let html = '';
         list.forEach((p, idx) => {
             const estadoClass = getEstadoClass(p.estado);
@@ -2583,14 +2604,11 @@
             else if (p.estado.includes("Por vencer")) badgeText = "Por vencer";
             else if (p.estado.includes("Vencido")) badgeText = "Vencido";
 
-            // Buscar precio por nombre normalizado
+            // Buscar precio por código (p.descripcion)
             let precioStr = '';
-            if (precios.length > 0) {
-                const nombreNorm = normalize(p.descripcion);
-                const encontrado = precios.find(pr => normalize(pr.nombre) === nombreNorm);
-                if (encontrado) {
-                    precioStr = `S/ ${encontrado.precio.toFixed(2)}`;
-                }
+            const precioVal = precioMap[p.descripcion];
+            if (precioVal !== undefined) {
+                precioStr = `S/ ${precioVal.toFixed(2)}`;
             }
 
             html += `
