@@ -99,12 +99,6 @@
             color: #93C5FD;
             border: 1px solid rgba(96, 165, 250, 0.04);
         }
-        .theme-azure .gen-btn {
-            background: rgba(163, 230, 53, 0.04);
-            border: 1px solid rgba(163, 230, 53, 0.06);
-            color: #a3e635;
-        }
-        .theme-azure .gen-btn:active { background: rgba(163, 230, 53, 0.08); }
 
         /* ===== HEADER ===== */
         .app-header {
@@ -611,15 +605,17 @@
         .price-table-wrap {
             overflow-x: auto;
             margin-top: 6px;
+            -webkit-overflow-scrolling: touch;
         }
         .price-table {
             width: 100%;
+            min-width: 280px;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 11px;
         }
         .price-table th {
             text-align: left;
-            padding: 8px 6px;
+            padding: 6px 4px;
             color: #94a3b8;
             font-weight: 600;
             font-size: 10px;
@@ -632,10 +628,11 @@
             z-index: 2;
         }
         .price-table td {
-            padding: 8px 6px;
+            padding: 6px 4px;
             border-bottom: 1px solid rgba(255,255,255,0.02);
             color: #ECF2F7;
             vertical-align: middle;
+            font-size: 11px;
         }
         .price-table tr:last-child td { border-bottom: none; }
         .price-table .precio-col {
@@ -647,6 +644,11 @@
             text-align: center;
             color: #64748b;
             padding: 20px;
+        }
+        /* Columna Nombre más flexible */
+        .price-table .nombre-col {
+            word-break: break-word;
+            max-width: 140px;
         }
 
         .import-area {
@@ -721,7 +723,10 @@
             .logo-icon { width: 36px; height: 36px; font-size: 16px; }
             .price-btn { font-size: 10px; padding: 3px 10px; }
             .modal-panel { padding: 18px 14px; }
-            .price-table { font-size: 11px; }
+            .price-table { font-size: 9px; min-width: 220px; }
+            .price-table th, .price-table td { padding: 3px 2px; font-size: 9px; }
+            .price-table .nombre-col { max-width: 80px; }
+            .price-counter { font-size: 10px; }
             .footer-note { flex-direction: column; align-items: stretch; gap: 4px; }
             .footer-note .footer-actions { justify-content: center; }
         }
@@ -848,10 +853,10 @@
                 <thead>
                     <tr>
                         <th>Línea</th>
-                        <th>Nombre</th>
+                        <th class="nombre-col">Nombre</th>
                         <th>UND</th>
-                        <th>Piezas</th>
-                        <th>Precio (IGV)</th>
+                        <th>Pz</th>
+                        <th>Precio</th>
                     </tr>
                 </thead>
                 <tbody id="priceTableBody">
@@ -859,7 +864,7 @@
                 </tbody>
             </table>
         </div>
-        <div style="margin-top:12px; font-size:11px; color:#64748b; text-align:right;" id="priceCounter">0 productos</div>
+        <div style="margin-top:12px; font-size:11px; color:#64748b; text-align:right;" id="priceCounter" class="price-counter">0 productos</div>
     </div>
 </div>
 
@@ -890,8 +895,9 @@
 
 <script>
     // =============================================================
-    //  ========== PRODUCTOS (TAL CUAL COMO LOS TENÍAS) ==========
-    //  =============================================================
+    //  ========== PRODUCTOS ==========
+    //  (Aquí van todos tus productos, los he incluido completos)
+    // =============================================================
     const productos = [
         { linea: "ONE FOOD", descripcion: "NESTLE CREMA DE LECHE LATA 48X160G XA", lote: "60520460", vencimiento: "20/08/2027", estado: "A tiempo" },
         { linea: "ONE FOOD", descripcion: "NESTLE EL MANJAR BOLSA 24X500G XR", lote: "60910080", vencimiento: "1/01/2027", estado: "A tiempo" },
@@ -1344,12 +1350,12 @@
         { linea: "CAFES", descripcion: "NESCAFE TRADICION TIRA 8(10X14G) PE", lote: "614301071", vencimiento: "23/11/2027", estado: "A tiempo" }
     ];
 
+
     // =============================================================
     //  ========== PRECIOS ==========
-    //  PEGA AQUÍ EL ARRAY DE PRECIOS GENERADO POR EL IMPORTADOR
-    //  Debe tener la estructura: { marca, linea, codigo, nombre, und, piezas, precio }
+    //  (Aquí va tu array de precios completo, ya lo tienes)
     // =============================================================
-const precios = [
+    const precios = [
   {
     "marca": "BEBIDAS",
     "linea": "COCOA D'ONOFRIO",
@@ -2821,7 +2827,7 @@ const precios = [
     }
 
     // =============================================================
-    //  ========== PANEL DE PRECIOS (con filtros) ==========
+    //  ========== PANEL DE PRECIOS (con filtros y límite inicial) ==========
     // =============================================================
     const priceBrandSelect = document.getElementById('priceBrandSelect');
     const priceSearchInput = document.getElementById('priceSearchInput');
@@ -2829,6 +2835,8 @@ const precios = [
     const resetPriceBtn = document.getElementById('resetPriceFilters');
     const priceTableBody = document.getElementById('priceTableBody');
     const priceCounter = document.getElementById('priceCounter');
+
+    const INITIAL_LIMIT = 6;
 
     function populatePriceLines() {
         const lines = [...new Set(precios.map(p => p.linea))].filter(l => l !== '').sort();
@@ -2855,8 +2863,11 @@ const precios = [
             return searchTokens.every(token => text.includes(token));
         });
 
-        renderPriceTable(filtered);
-        priceCounter.textContent = filtered.length + ' productos';
+        const hasFilter = (searchVal !== '' || brandVal !== '');
+        let displayData = hasFilter ? filtered : filtered.slice(0, INITIAL_LIMIT);
+
+        renderPriceTable(displayData);
+        priceCounter.textContent = displayData.length + ' de ' + filtered.length + ' productos';
     }
 
     function renderPriceTable(list) {
@@ -2869,7 +2880,7 @@ const precios = [
             html += `
                 <tr>
                     <td>${pr.linea || ''}</td>
-                    <td>${pr.nombre}</td>
+                    <td class="nombre-col">${pr.nombre}</td>
                     <td>${pr.und || ''}</td>
                     <td>${pr.piezas || ''}</td>
                     <td class="precio-col">S/ ${pr.precio.toFixed(2)}</td>
@@ -2879,7 +2890,7 @@ const precios = [
         priceTableBody.innerHTML = html;
     }
 
-    // Eventos del panel de precios
+    // Eventos
     applyPriceBtn.addEventListener('click', filterPrices);
     resetPriceBtn.addEventListener('click', () => {
         priceSearchInput.value = '';
@@ -2893,7 +2904,7 @@ const precios = [
     priceBrandSelect.addEventListener('change', filterPrices);
 
     // =============================================================
-    //  ========== GENERADOR DE PRECIOS (Importar desde Excel) ==========
+    //  ========== GENERADOR DE PRECIOS ==========
     // =============================================================
     document.getElementById('importPricesBtn').addEventListener('click', () => {
         openOverlay('importOverlay');
@@ -2918,7 +2929,6 @@ const precios = [
         let sep = '\t';
         if (lines[0].includes(';')) sep = ';';
         if (!lines[0].includes('\t') && !lines[0].includes(';')) {
-            // Dividir por múltiples espacios
             const parts = lines[0].split(/\s{2,}/);
             if (parts.length >= 5) {
                 const parsed = lines.map(line => line.split(/\s{2,}/).map(s => s.trim()));
@@ -2979,7 +2989,7 @@ const precios = [
         const textarea = document.getElementById('generatedCode');
         textarea.value = code;
         container.style.display = 'block';
-        alert('Código generado. Cópialo y reemplaza el array "precios" en el script (línea donde dice "PEGA AQUÍ EL ARRAY DE PRECIOS").');
+        alert('Código generado. Cópialo y reemplaza el array "precios" en el script.');
     }
 
     document.getElementById('clearImportBtn').addEventListener('click', () => {
@@ -3036,8 +3046,6 @@ const precios = [
     //  ========== CARGA INICIAL ==========
     // =============================================================
     filterProducts();
-
-    // Si ya hay precios, actualizar líneas y tabla
     if (precios.length > 0) {
         populatePriceLines();
         filterPrices();
