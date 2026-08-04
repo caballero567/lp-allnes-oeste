@@ -88,6 +88,23 @@
         .theme-azure .filter-label i { color: #60A5FA; }
         .theme-azure .results-header h3 i { color: #60A5FA; }
         .theme-azure .footer-note i { color: #60A5FA; }
+        .theme-azure .price-btn {
+            background: rgba(96, 165, 250, 0.08);
+            color: #60A5FA;
+            border: 1px solid rgba(96, 165, 250, 0.1);
+        }
+        .theme-azure .price-btn:hover { background: rgba(96, 165, 250, 0.15); }
+        .theme-azure .price-badge {
+            background: rgba(96, 165, 250, 0.04);
+            color: #93C5FD;
+            border: 1px solid rgba(96, 165, 250, 0.04);
+        }
+        .theme-azure .gen-btn {
+            background: rgba(163, 230, 53, 0.04);
+            border: 1px solid rgba(163, 230, 53, 0.06);
+            color: #a3e635;
+        }
+        .theme-azure .gen-btn:active { background: rgba(163, 230, 53, 0.08); }
 
         /* ===== HEADER ===== */
         .app-header {
@@ -130,6 +147,11 @@
             color: #ECF2F7;
         }
         .logo-text span { color: #60A5FA; }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .header-stats {
             background: rgba(0,0,0,0.2);
             padding: 4px 12px;
@@ -138,8 +160,27 @@
             font-weight: 600;
             color: #94a3b8;
             border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .header-stats i { margin-right: 4px; color: #60A5FA; font-size: 11px; }
+        .header-stats i { color: #60A5FA; font-size: 11px; }
+        .price-btn {
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid rgba(96, 165, 250, 0.1);
+            color: #60A5FA;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+        .price-btn:active { transform: scale(0.95); }
 
         .header-sub {
             display: flex;
@@ -414,6 +455,16 @@
         .fecha-tag.atiempo { color: #a3e635; background: rgba(163, 230, 53, 0.05); }
         .fecha-tag.por-vencer { color: #fbbf24; background: rgba(251, 191, 36, 0.05); }
         .fecha-tag.vencido { color: #f87171; background: rgba(248, 113, 113, 0.05); }
+        .price-badge {
+            font-weight: 600;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 30px;
+            background: rgba(96, 165, 250, 0.04);
+            color: #93C5FD;
+            border: 1px solid rgba(96, 165, 250, 0.04);
+            white-space: nowrap;
+        }
 
         .empty-state {
             text-align: center;
@@ -428,7 +479,11 @@
 
         /* ===== FOOTER ===== */
         .footer-note {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
             font-size: 10px;
             padding: 14px 0 2px 0;
             color: #64748b;
@@ -443,6 +498,212 @@
             font-size: 9px;
             opacity: 0.5;
         }
+        .footer-note .footer-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .footer-note .footer-btn {
+            background: rgba(96, 165, 250, 0.04);
+            border: 1px solid rgba(96, 165, 250, 0.06);
+            color: #60A5FA;
+            border-radius: 40px;
+            padding: 2px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .footer-note .footer-btn:active { transform: scale(0.95); }
+
+        /* ===== MODALES / PANELES ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-panel {
+            background: #0F1A22;
+            border-radius: 28px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            padding: 24px 20px;
+            border: 1px solid rgba(96, 165, 250, 0.06);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-panel .close-btn {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            color: #94a3b8;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.15s;
+        }
+        .modal-panel .close-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.06); }
+        .modal-panel h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ECF2F7;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-panel h2 i { color: #60A5FA; }
+        .modal-panel .hint {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        /* Filtros dentro del modal de precios */
+        .price-filters {
+            background: rgba(16, 26, 34, 0.3);
+            border-radius: 20px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .price-filters .filter-group {
+            margin-bottom: 8px;
+        }
+        .price-filters .filter-group:last-child { margin-bottom: 0; }
+        .price-filters .filter-wrapper {
+            background: rgba(0,0,0,0.15);
+        }
+        .price-filters .filter-actions {
+            margin-top: 8px;
+        }
+        .price-filters .btn-reset {
+            flex: 0 0 44px;
+        }
+
+        .price-table-wrap {
+            overflow-x: auto;
+            margin-top: 6px;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .price-table th {
+            text-align: left;
+            padding: 8px 6px;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            position: sticky;
+            top: 0;
+            background: #0F1A22;
+            z-index: 2;
+        }
+        .price-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            color: #ECF2F7;
+            vertical-align: middle;
+        }
+        .price-table tr:last-child td { border-bottom: none; }
+        .price-table .precio-col {
+            font-weight: 600;
+            color: #60A5FA;
+            white-space: nowrap;
+        }
+        .price-table .empty-row td {
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+        }
+
+        .import-area {
+            margin-top: 12px;
+        }
+        .import-area textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 12px;
+            color: #ECF2F7;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            resize: vertical;
+            min-height: 150px;
+        }
+        .import-area textarea:focus { outline: none; border-color: #60A5FA; }
+        .import-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .import-actions button {
+            background: rgba(96, 165, 250, 0.04);
+            border: 1px solid rgba(96, 165, 250, 0.06);
+            color: #60A5FA;
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .import-actions button:active { transform: scale(0.95); background: rgba(96, 165, 250, 0.08); }
+        .generated-code {
+            margin-top: 14px;
+        }
+        .generated-code textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 12px;
+            color: #a3e635;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            resize: vertical;
+            min-height: 120px;
+            white-space: pre;
+        }
+        .generated-code textarea:focus { outline: none; border-color: #60A5FA; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 420px) {
@@ -458,9 +719,15 @@
             .header-stats { font-size: 11px; padding: 4px 10px; }
             .logo-text { font-size: 17px; }
             .logo-icon { width: 36px; height: 36px; font-size: 16px; }
+            .price-btn { font-size: 10px; padding: 3px 10px; }
+            .modal-panel { padding: 18px 14px; }
+            .price-table { font-size: 11px; }
+            .footer-note { flex-direction: column; align-items: stretch; gap: 4px; }
+            .footer-note .footer-actions { justify-content: center; }
         }
         @media (min-width: 600px) {
             .app-container { max-width: 560px; padding: 24px; }
+            .modal-panel { max-width: 700px; }
         }
     </style>
 </head>
@@ -474,7 +741,10 @@
                 <div class="logo-icon"><i class="fas fa-cubes"></i></div>
                 <div class="logo-text">Allnes <span>Oeste</span></div>
             </div>
-            <div class="header-stats"><i class="fas fa-box"></i> <span id="totalBadge">0</span></div>
+            <div class="header-right">
+                <div class="header-stats"><i class="fas fa-box"></i> <span id="totalBadge">0</span></div>
+                <button class="price-btn" id="priceListBtn"><i class="fas fa-tag"></i> Lista de Precios</button>
+            </div>
         </div>
         <div class="header-sub">
             <span><i class="fas fa-calendar-alt"></i> Control de Lotes</span>
@@ -506,7 +776,7 @@
         </div>
     </div>
 
-    <!-- FILTROS -->
+    <!-- FILTROS (LOTES) -->
     <div class="filters-panel">
         <div class="filter-group">
             <div class="filter-label"><i class="fas fa-tag"></i> Línea</div>
@@ -528,7 +798,7 @@
         </div>
     </div>
 
-    <!-- RESULTADOS -->
+    <!-- RESULTADOS (LOTES) -->
     <div class="results-header">
         <h3><i class="fas fa-list-ul"></i> Productos</h3>
         <div class="pill-count" id="resultCounter">0</div>
@@ -536,16 +806,92 @@
     <div class="card-list" id="cardList"></div>
 
     <!-- FOOTER -->
-    <div class="footer-note"><i class="fas fa-chart-line"></i> Gestión de Lotes</div>
+    <div class="footer-note">
+        <span><i class="fas fa-chart-line"></i> Gestión de Lotes</span>
+        <div class="footer-actions">
+            <button class="footer-btn" id="importPricesBtn"><i class="fas fa-upload"></i> Importar Precios</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MODAL: LISTA DE PRECIOS (con filtros)
+     ============================================================ -->
+<div class="overlay" id="priceListOverlay">
+    <div class="modal-panel">
+        <button class="close-btn" id="closePriceList"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-tag"></i> Lista de Precios</h2>
+
+        <div class="price-filters">
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-tag"></i> Línea</div>
+                <div class="filter-wrapper">
+                    <i class="fas fa-chevron-down"></i>
+                    <select id="priceBrandSelect"><option value="">Todas</option></select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label"><i class="fas fa-search"></i> Buscador</div>
+                <div class="filter-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="priceSearchInput" placeholder="Buscar por nombre o código..." autocomplete="off" />
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn-primary" id="applyPriceFilters" style="flex:2;"><i class="fas fa-search"></i> Buscar</button>
+                <button class="btn-reset" id="resetPriceFilters"><i class="fas fa-undo-alt"></i></button>
+            </div>
+        </div>
+
+        <div class="price-table-wrap">
+            <table class="price-table" id="priceTable">
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Nombre</th>
+                        <th>UND</th>
+                        <th>Piezas</th>
+                        <th>Precio (IGV)</th>
+                    </tr>
+                </thead>
+                <tbody id="priceTableBody">
+                    <tr><td colspan="5" class="empty-row">No hay precios cargados</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top:12px; font-size:11px; color:#64748b; text-align:right;" id="priceCounter">0 productos</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MODAL: GENERADOR DE PRECIOS (Importar desde Excel)
+     ============================================================ -->
+<div class="overlay" id="importOverlay">
+    <div class="modal-panel">
+        <button class="close-btn" id="closeImport"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-file-import"></i> Generador de Precios</h2>
+        <p class="hint">
+            Copia tus filas de Excel con las columnas: <strong>Marca, Línea, Cod. Producto, Nombre del Producto, UND, Piezas, Con IGV</strong>.
+            Puedes incluir o no los encabezados. El sistema detecta automáticamente el separador (tabulador, punto y coma, o espacios múltiples).
+        </p>
+        <div class="import-area">
+            <textarea id="excelInput" placeholder="Pega aquí los datos de precios..."></textarea>
+            <div class="import-actions">
+                <button id="generateCodeBtn"><i class="fas fa-code"></i> Generar Código</button>
+                <button id="clearImportBtn"><i class="fas fa-eraser"></i> Limpiar</button>
+            </div>
+        </div>
+        <div class="generated-code" id="generatedCodeContainer" style="display:none;">
+            <label style="font-size:12px; color:#94a3b8; font-weight:600;">Código generado (copia y reemplaza el array <code>precios</code>):</label>
+            <textarea id="generatedCode" readonly></textarea>
+        </div>
+    </div>
 </div>
 
 <script>
     // =============================================================
-    //  ========== DESDE AQUÍ PEGAR PRODUCTOS ==========
-    //  Para actualizar la lista, solo reemplaza el array 'productos'
-    //  que está entre las líneas de comentario.
-    //  Cada producto debe tener: linea, descripcion, lote, vencimiento, estado.
-    // =============================================================
+    //  ========== PRODUCTOS (TAL CUAL COMO LOS TENÍAS) ==========
+    //  =============================================================
     const productos = [
         { linea: "ONE FOOD", descripcion: "NESTLE CREMA DE LECHE LATA 48X160G XA", lote: "60520460", vencimiento: "20/08/2027", estado: "A tiempo" },
         { linea: "ONE FOOD", descripcion: "NESTLE EL MANJAR BOLSA 24X500G XR", lote: "60910080", vencimiento: "1/01/2027", estado: "A tiempo" },
@@ -997,8 +1343,1346 @@
         { linea: "CAFES", descripcion: "NESCAFE TRADICION TIRA 8(10X14G) PE", lote: "614201071", vencimiento: "22/11/2027", estado: "A tiempo" },
         { linea: "CAFES", descripcion: "NESCAFE TRADICION TIRA 8(10X14G) PE", lote: "614301071", vencimiento: "23/11/2027", estado: "A tiempo" }
     ];
-    // ========== HASTA AQUÍ ==========
+
     // =============================================================
+    //  ========== PRECIOS ==========
+    //  PEGA AQUÍ EL ARRAY DE PRECIOS GENERADO POR EL IMPORTADOR
+    //  Debe tener la estructura: { marca, linea, codigo, nombre, und, piezas, precio }
+    // =============================================================
+const precios = [
+  {
+    "marca": "BEBIDAS",
+    "linea": "COCOA D'ONOFRIO",
+    "codigo": "12436586",
+    "nombre": "D'ONOFRIO COCOA TIRA-N 7(24X10G) PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 20
+  },
+  {
+    "marca": "",
+    "linea": "COCOA D'ONOFRIO",
+    "codigo": "12517266",
+    "nombre": "D'ONOFRIO COCOA DOYPACK 12X150G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 185.86
+  },
+  {
+    "marca": "",
+    "linea": "ECCO",
+    "codigo": "12519668",
+    "nombre": "ECCO BEBIDA BASE CEBADA 15X250G PE",
+    "und": "CJ",
+    "piezas": 15,
+    "precio": 211.46
+  },
+  {
+    "marca": "",
+    "linea": "ECCO",
+    "codigo": "12523582",
+    "nombre": "ECCO BEBIDA BASE CEBADA 24X80G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 137.77
+  },
+  {
+    "marca": "",
+    "linea": "ECCO",
+    "codigo": "12610220",
+    "nombre": "ECCO DOYPACK 16X170G PE",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 155.55
+  },
+  {
+    "marca": "",
+    "linea": "ECCO",
+    "codigo": "12624851",
+    "nombre": "ECCO SACHET 10(14X10G) PE",
+    "und": "DS",
+    "piezas": 14,
+    "precio": 11.29
+  },
+  {
+    "marca": "",
+    "linea": "ECCO",
+    "codigo": "13129686",
+    "nombre": "ECCO CEBADA 15X175G PE",
+    "und": "CJ",
+    "piezas": 15,
+    "precio": 201.6
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "12517274",
+    "nombre": "MILO ACTIV-GO DOY PACK ZIPPER 48X190GPE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 531.85
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "12517278",
+    "nombre": "MILO ACTIV-GO DOY PACK 12X350G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 173.45
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "12580625",
+    "nombre": "MILO ACTIV-GO LATA 12X380G N1 PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 250.03
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "12620849",
+    "nombre": "MILO TIRAS 5(8X48G) PE",
+    "und": "DS",
+    "piezas": 8,
+    "precio": 20.34
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "12622133",
+    "nombre": "MILO ACTIV-GO 6(24X16G) PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 24.8
+  },
+  {
+    "marca": "",
+    "linea": "MILO",
+    "codigo": "14518979",
+    "nombre": "MILO ACT-GO DOYPACK 12X350G PRPOTE PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 183.18
+  },
+  {
+    "marca": "",
+    "linea": "NESQUIK",
+    "codigo": "12331290",
+    "nombre": "NESQUIK OPTISTART CHOC TIRA15(12X13G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 8.12
+  },
+  {
+    "marca": "",
+    "linea": "NESQUIK",
+    "codigo": "12517275",
+    "nombre": "NESQUIK OPTISTART CHOCOLATE 12X470G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 198.74
+  },
+  {
+    "marca": "",
+    "linea": "NESQUIK",
+    "codigo": "12517277",
+    "nombre": "NESQUIK OPTISTART CHOCOLATE 48X190G PE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 420.95
+  },
+  {
+    "marca": "",
+    "linea": "NESQUIK",
+    "codigo": "12533778",
+    "nombre": "NESQUIK OPTISTART CHOC TR 24X380G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 321.15
+  },
+  {
+    "marca": "CAFES",
+    "linea": "KIRMA 7GR",
+    "codigo": "12611025",
+    "nombre": "NESCAFE KIRMA TIRA 12(16X7G) PE",
+    "und": "DS",
+    "piezas": 16,
+    "precio": 16.54
+  },
+  {
+    "marca": "",
+    "linea": "NKF CAPUCCINO",
+    "codigo": "12596789",
+    "nombre": "NESCAFE CAPPUCCINO 6(8X14G) XR",
+    "und": "DS",
+    "piezas": 8,
+    "precio": 16.74
+  },
+  {
+    "marca": "",
+    "linea": "NKF DESCAFEINADO",
+    "codigo": "12585356",
+    "nombre": "NESCAFE DECAF MYW 12X170G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 398.32
+  },
+  {
+    "marca": "",
+    "linea": "NKF DESCAFEINADO",
+    "codigo": "12585672",
+    "nombre": "NESCAFE DECAF ORIGINALDAWNJARMYW12X40GPE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 150.05
+  },
+  {
+    "marca": "",
+    "linea": "NKF DESCAFEINADO",
+    "codigo": "12623390",
+    "nombre": "NESCAFE DECAF DOYPACK 24X90G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 525.09
+  },
+  {
+    "marca": "",
+    "linea": "NKF FINA SELECCIÓN",
+    "codigo": "12625478",
+    "nombre": "NESCAFÉ FINA SELECCIÓN BOTTLE 12X170G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 337.57
+  },
+  {
+    "marca": "",
+    "linea": "NKF GOLD",
+    "codigo": "12614379",
+    "nombre": "NESCAFÉ GOLD SIGNATURE JAR 12X95G AR",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 249.57
+  },
+  {
+    "marca": "",
+    "linea": "NKF GOLD",
+    "codigo": "12614897",
+    "nombre": "NESCAFE GOLD SIGNATURE JAR 6X190G PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 211.76
+  },
+  {
+    "marca": "",
+    "linea": "NKF GOLD",
+    "codigo": "12616554",
+    "nombre": "NESCAFÉ GOLD JAR 12X50G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 180.53
+  },
+  {
+    "marca": "",
+    "linea": "NKF GOLD",
+    "codigo": "14511810",
+    "nombre": "NESCAFE GOLD 12(10X11G)",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 23.25
+  },
+  {
+    "marca": "",
+    "linea": "NKF KIRMA",
+    "codigo": "12303346",
+    "nombre": "NESCAFE KIRMA DOY PACK ZIPPER 24X45G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 147.15
+  },
+  {
+    "marca": "",
+    "linea": "NKF KIRMA",
+    "codigo": "12623596",
+    "nombre": "NESCAFE KIRMA DOYPACK 16X140G PE",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 293.91
+  },
+  {
+    "marca": "",
+    "linea": "NKF KIRMA",
+    "codigo": "12624642",
+    "nombre": "NESCAFÉ KIRMA 12X180G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 246.24
+  },
+  {
+    "marca": "",
+    "linea": "NKF KIRMA",
+    "codigo": "13465905",
+    "nombre": "NESCAFÉ KIRMA STRIP 8(10X14G) PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 18.97
+  },
+  {
+    "marca": "",
+    "linea": "NKF MOKA",
+    "codigo": "12596788",
+    "nombre": "NESCAFE MOKA 6(8X18G) XR",
+    "und": "DS",
+    "piezas": 8,
+    "precio": 16.74
+  },
+  {
+    "marca": "",
+    "linea": "NKF RESERVA",
+    "codigo": "12617106",
+    "nombre": "NESCAFE RESERVA TIRA 18(10X7G) PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 12.04
+  },
+  {
+    "marca": "",
+    "linea": "NKF RESERVA",
+    "codigo": "12617107",
+    "nombre": "NESCAFE RESERVA TIRA 12(10X15G)PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 19.94
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12458548",
+    "nombre": "NESCAFE TRADICION 24X50G N1 PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 270.87
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12459081",
+    "nombre": "NESCAFE TRADICION 24X100G N1 PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 482.23
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12518111",
+    "nombre": "NESCAFE TRADICION 12X170G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 278.81
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12623363",
+    "nombre": "NESCAFE TRADICION DP ZIPPER 24X45G N1 PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 204.67
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12623364",
+    "nombre": "NESCAFE TRADICION DP ZIPPER 24X90G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 378.36
+  },
+  {
+    "marca": "",
+    "linea": "NKF TRADICION",
+    "codigo": "12623566",
+    "nombre": "NESCAFE TRADICION ZIPPER DP 16X140G N1PE",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 347.39
+  },
+  {
+    "marca": "",
+    "linea": "TRADICION 14GR",
+    "codigo": "13503347",
+    "nombre": "NESCAFE TRADICION TIRA 8(10X14G) PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 21
+  },
+  {
+    "marca": "",
+    "linea": "TRADICION 7GR",
+    "codigo": "12572845",
+    "nombre": "NESCAFE TRADICION TIRA 12(18X7G) PE",
+    "und": "DS",
+    "piezas": 18,
+    "precio": 22.55
+  },
+  {
+    "marca": "CHOCOLATES",
+    "linea": "BESOS DE MOZA X20",
+    "codigo": "12457890",
+    "nombre": "NESTLE BESOS DE MOZA CHOC 8X480G PE",
+    "und": "CJ",
+    "piezas": 8,
+    "precio": 153.59
+  },
+  {
+    "marca": "",
+    "linea": "BESOS DE MOZA X9",
+    "codigo": "12457878",
+    "nombre": "NESTLE BESOSDEMOZA CHOC 24(9X24G) PE",
+    "und": "DS",
+    "piezas": 9,
+    "precio": 9.24
+  },
+  {
+    "marca": "",
+    "linea": "KIT KAT REGULAR",
+    "codigo": "12468576",
+    "nombre": "KIT KAT 4 FINGER 8(12X41.5G) N1 PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 40.07
+  },
+  {
+    "marca": "",
+    "linea": "KIT KAT REGULAR",
+    "codigo": "12554468",
+    "nombre": "KIT KAT WHITE 4FNGR 4(24X41.5G) XI",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 77.03
+  },
+  {
+    "marca": "",
+    "linea": "LENTEJAS BOLSA",
+    "codigo": "12162636",
+    "nombre": "LENTEJAS BOLSA 24(24X16G)PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 19.26
+  },
+  {
+    "marca": "",
+    "linea": "LENTEJAS CAJA",
+    "codigo": "12276820",
+    "nombre": "LENTEJAS CONFITE CHOC CAJA 24(20X30G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 33.04
+  },
+  {
+    "marca": "",
+    "linea": "LENTEJAS PIÑATERO",
+    "codigo": "12583344",
+    "nombre": "NESTLE LENTEJAS FIESTA 15X240G PE",
+    "und": "CJ",
+    "piezas": 15,
+    "precio": 187.8
+  },
+  {
+    "marca": "",
+    "linea": "MULTIPACK",
+    "codigo": "14055703",
+    "nombre": "NEST BMBN MULTIPACK 15X320G PE",
+    "und": "CJ",
+    "piezas": 15,
+    "precio": 293.29
+  },
+  {
+    "marca": "",
+    "linea": "PRINCESA BOX",
+    "codigo": "12227325",
+    "nombre": "NESTLE PRINCESA CHOC CAJA 24(16X8G) PE",
+    "und": "DS",
+    "piezas": 16,
+    "precio": 12.72
+  },
+  {
+    "marca": "",
+    "linea": "PRINCESA CLASICO",
+    "codigo": "12629783",
+    "nombre": "NESTLÉ PRINCESA BARRA 24(18X28G) PE",
+    "und": "DS",
+    "piezas": 18,
+    "precio": 38.23
+  },
+  {
+    "marca": "",
+    "linea": "SORRENTO",
+    "codigo": "12003780",
+    "nombre": "NESTLE SORRENTO 30(20X32G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 28.08
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME ALMENDRAS",
+    "codigo": "12523353",
+    "nombre": "NESTLE SUBLIME ALMENDRAS 24(15X50G) PE",
+    "und": "DS",
+    "piezas": 15,
+    "precio": 47.61
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME BITTER",
+    "codigo": "12522364",
+    "nombre": "NESTLE SUBLIME BITTER 24(20X38G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 55.46
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME CLASICO",
+    "codigo": "12591666",
+    "nombre": "NESTLE SUBLIME CLASICO 24(24X26G) PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 39.65
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME CLASICO",
+    "codigo": "14505987",
+    "nombre": "NESTLE SBLM CAPUCCINO 18(12X37G) PE",
+    "und": "DS",
+    "piezas": 18,
+    "precio": 29.59
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME CON GALLETA",
+    "codigo": "12338581",
+    "nombre": "SUBLIME CHOCOLATE GALLETA 12(24X28G) PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 39.65
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME DUO",
+    "codigo": "12511310",
+    "nombre": "SUBLIME DUO 21(30X28G) PE",
+    "und": "DS",
+    "piezas": 30,
+    "precio": 36.11
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME EXTREMO",
+    "codigo": "12523354",
+    "nombre": "NESTLE SUBLIME EXTREMO 24(15X50G) PE",
+    "und": "DS",
+    "piezas": 15,
+    "precio": 47.61
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME POWER",
+    "codigo": "12630648",
+    "nombre": "NESTLE SUBLIME POWER 33(6X25G) N1 PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 7.22
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME POWER",
+    "codigo": "14505965",
+    "nombre": "NESTLE SBLM CRISPY 12(20X20G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 16.05
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME SONRISA",
+    "codigo": "12627929",
+    "nombre": "NESTLE SUBLIME SONRISA 24(20X37G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 49.32
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME SONRISA",
+    "codigo": "12941147",
+    "nombre": "NESTLE SUBLIME SONRISA 64(8X37G) PE",
+    "und": "DS",
+    "piezas": 8,
+    "precio": 15.39
+  },
+  {
+    "marca": "",
+    "linea": "SUBLIME SONRISA BLANCO",
+    "codigo": "12521624",
+    "nombre": "NESTLE SUBLIME SONRISABLA 24(20X38G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 49.32
+  },
+  {
+    "marca": "",
+    "linea": "TRIANGULO CLASICO",
+    "codigo": "12941146",
+    "nombre": "NESTLE TRIANGULO CLASICO 64(10X29G) PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 15.43
+  },
+  {
+    "marca": "",
+    "linea": "TRIANGULO CLASICO",
+    "codigo": "14410581",
+    "nombre": "NEST TRGL CLASSIC TRAD 24(20X29G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 32.57
+  },
+  {
+    "marca": "",
+    "linea": "TRIANGULO MARMOLEADO",
+    "codigo": "12606836",
+    "nombre": "NESTLE TRIANGULO MARMOLEADO24(20X30G) PE",
+    "und": "DS",
+    "piezas": 20,
+    "precio": 42.48
+  },
+  {
+    "marca": "CPW",
+    "linea": "CHILDHOOD FUN",
+    "codigo": "12295077",
+    "nombre": "CHOCAPIC CEREAL 26X90G PE",
+    "und": "CJ",
+    "piezas": 26,
+    "precio": 96.34
+  },
+  {
+    "marca": "",
+    "linea": "CHILDHOOD FUN",
+    "codigo": "12497223",
+    "nombre": "CHOCAPIC CER 18X350G PE",
+    "und": "CJ",
+    "piezas": 18,
+    "precio": 278.46
+  },
+  {
+    "marca": "",
+    "linea": "CHILDHOOD FUN",
+    "codigo": "12497506",
+    "nombre": "TRIX CEREAL 18X330G PE",
+    "und": "CJ",
+    "piezas": 18,
+    "precio": 259.98
+  },
+  {
+    "marca": "",
+    "linea": "CHILDHOOD FUN",
+    "codigo": "12513652",
+    "nombre": "CHOCAPIC CEREAL 14X540G PE",
+    "und": "CJ",
+    "piezas": 14,
+    "precio": 267.46
+  },
+  {
+    "marca": "",
+    "linea": "CHILDHOOD FUN",
+    "codigo": "12593748",
+    "nombre": "TRIX CEREAL 36X90G PE",
+    "und": "CJ",
+    "piezas": 36,
+    "precio": 126.72
+  },
+  {
+    "marca": "",
+    "linea": "EVERYDAY WELLNES",
+    "codigo": "12473570",
+    "nombre": "FITNESS CEREAL 16X570G PE",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 339.46
+  },
+  {
+    "marca": "",
+    "linea": "EVERYDAY WELLNES",
+    "codigo": "12497503",
+    "nombre": "FITNESS CEREAL 18X285G PE",
+    "und": "CJ",
+    "piezas": 18,
+    "precio": 203.69
+  },
+  {
+    "marca": "",
+    "linea": "EVERYDAY WELLNES",
+    "codigo": "12497504",
+    "nombre": "FITNESS HONEY&ALMOND CER 18X330G N1 PE",
+    "und": "CJ",
+    "piezas": 18,
+    "precio": 280.58
+  },
+  {
+    "marca": "",
+    "linea": "SIMPLE GOODNESS",
+    "codigo": "12516115",
+    "nombre": "CORN FLAKES CEREAL 14X405G N3 XW",
+    "und": "CJ",
+    "piezas": 14,
+    "precio": 180.89
+  },
+  {
+    "marca": "",
+    "linea": "SIMPLE GOODNESS",
+    "codigo": "12516400",
+    "nombre": "CORN FLAKES CEREAL 20X180G N2 XW",
+    "und": "CJ",
+    "piezas": 20,
+    "precio": 185.26
+  },
+  {
+    "marca": "",
+    "linea": "SIMPLE GOODNESS",
+    "codigo": "12568909",
+    "nombre": "NESTLE CORN FLAKES CEREAL 8X740G N1 XW",
+    "und": "CJ",
+    "piezas": 8,
+    "precio": 150.51
+  },
+  {
+    "marca": "",
+    "linea": "TASTY FAVORITES",
+    "codigo": "12531432",
+    "nombre": "SUBLIME BREAKFAST CEREAL 24X230G XW",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 252.9
+  },
+  {
+    "marca": "GALLETAS",
+    "linea": "BAÑADAS",
+    "codigo": "12460634",
+    "nombre": "MOROCHAS SNACK GALLETA 8(8X42G) PE",
+    "und": "DS",
+    "piezas": 8,
+    "precio": 10.01
+  },
+  {
+    "marca": "",
+    "linea": "BAÑADAS",
+    "codigo": "12499462",
+    "nombre": "MOROCHAS GALLETA TACO 18(6X75G) PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 12.6
+  },
+  {
+    "marca": "",
+    "linea": "BAÑADAS",
+    "codigo": "14495976",
+    "nombre": "MRHS BISCUITS TRAD 22(12X30G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 10.05
+  },
+  {
+    "marca": "",
+    "linea": "RELLENAS",
+    "codigo": "12583022",
+    "nombre": "SUBLIME GALLETA RELLENA 24(6X36G) PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 5.03
+  },
+  {
+    "marca": "",
+    "linea": "SODA",
+    "codigo": "12180615",
+    "nombre": "DORE GALLETA 27X230G PE",
+    "und": "CJ",
+    "piezas": 27,
+    "precio": 121.39
+  },
+  {
+    "marca": "",
+    "linea": "SODA",
+    "codigo": "12188190",
+    "nombre": "DORE INDIVIDUAL GALLETA 24(6X24G) PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 4.89
+  },
+  {
+    "marca": "",
+    "linea": "WAFER",
+    "codigo": "12498825",
+    "nombre": "COCOSETTE MAXI WAFER 6(24X50G) PE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 30.02
+  },
+  {
+    "marca": "LACTEOS",
+    "linea": "ANCHOR",
+    "codigo": "12471911",
+    "nombre": "ANCHOR MZC LAC POLVO TARRO 12X800GN1 PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 387.51
+  },
+  {
+    "marca": "",
+    "linea": "ANCHOR",
+    "codigo": "12505181",
+    "nombre": "ANCHOR MEZCLA LACTEA EN POLVO 48X96G PE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 188.21
+  },
+  {
+    "marca": "",
+    "linea": "IDEAL AMANECER",
+    "codigo": "12535266",
+    "nombre": "IDEAL AMANECER MZC LAC 24X390G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 72.22
+  },
+  {
+    "marca": "",
+    "linea": "IDEAL COMPLEJO B",
+    "codigo": "14506919",
+    "nombre": "IDL COMPLEJO-B MZC LAC 8(6X390G) PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 22.7
+  },
+  {
+    "marca": "",
+    "linea": "IDEAL CREMOSITA",
+    "codigo": "12526089",
+    "nombre": "IDEAL CREMOSITA MZC LAC 24X390G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 91.19
+  },
+  {
+    "marca": "",
+    "linea": "IDEAL CREMOSITA",
+    "codigo": "14521679",
+    "nombre": "IDEAL CREMOSITA 24X390G + MAGGI GALLINA 7G",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 91.19
+  },
+  {
+    "marca": "",
+    "linea": "IDEAL LIGHT",
+    "codigo": "12526463",
+    "nombre": "IDEAL LIGHT MZC LAC 24X390G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 89.77
+  },
+  {
+    "marca": "NUTRITION",
+    "linea": "ETAPA 2",
+    "codigo": "12611517",
+    "nombre": "NAN 2 FORM LAC LIQUIDA 8(6X390G) N1 PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 31.29
+  },
+  {
+    "marca": "",
+    "linea": "ETAPA 2",
+    "codigo": "12611518",
+    "nombre": "NAN 2 FORM LAC LIQUIDA 24X390G N1 PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 128.01
+  },
+  {
+    "marca": "",
+    "linea": "ETAPA 3",
+    "codigo": "12522641",
+    "nombre": "NAN 3 FORM LAC LIQUIDA 8(6X390G) PE",
+    "und": "DS",
+    "piezas": 6,
+    "precio": 29.38
+  },
+  {
+    "marca": "",
+    "linea": "ETAPA 3",
+    "codigo": "12522654",
+    "nombre": "NAN 3 FORM LAC LIQUIDA 24X390G PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 119.79
+  },
+  {
+    "marca": "",
+    "linea": "FRASCO",
+    "codigo": "12415983",
+    "nombre": "GERBER 2AET COMPOTA MANZANA 12X113G XW",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 52.68
+  },
+  {
+    "marca": "",
+    "linea": "FRASCO",
+    "codigo": "12415992",
+    "nombre": "GERBER 2AET COMPOTA PERA 12X113G XW",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 52.68
+  },
+  {
+    "marca": "",
+    "linea": "FRASCO",
+    "codigo": "12417518",
+    "nombre": "GERBER 2AET COMPOTA MANGO 12X113G XW",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 52.68
+  },
+  {
+    "marca": "",
+    "linea": "FRASCO",
+    "codigo": "12454118",
+    "nombre": "GERBER 1AET PLATANO 16X100G XP",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 79.11
+  },
+  {
+    "marca": "",
+    "linea": "FRASCO",
+    "codigo": "12454228",
+    "nombre": "GERBER 1AET MANZANA16X100G XP",
+    "und": "CJ",
+    "piezas": 16,
+    "precio": 79.11
+  },
+  {
+    "marca": "ONE FOOD",
+    "linea": "CALDO EN POLVO",
+    "codigo": "12589930",
+    "nombre": "MAGGI CALDO POLVO GALLINA 80(10X7G)N3 PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 2.03
+  },
+  {
+    "marca": "",
+    "linea": "CALDO EN POLVO",
+    "codigo": "12590272",
+    "nombre": "MAGGI CALDO POLVO CARNE 80(10X7G)N4 PE",
+    "und": "DS",
+    "piezas": 10,
+    "precio": 2.03
+  },
+  {
+    "marca": "",
+    "linea": "CALDOS & CUBOS",
+    "codigo": "12593004",
+    "nombre": "MAGGI CUBO GALLINA 24(26X18.8G) N1 PE",
+    "und": "DS",
+    "piezas": 26,
+    "precio": 16.96
+  },
+  {
+    "marca": "",
+    "linea": "CALDOS & CUBOS",
+    "codigo": "12593042",
+    "nombre": "MAGGI CUBO CARNE A/S 4(42X75.2G) PE",
+    "und": "DS",
+    "piezas": 42,
+    "precio": 138.77
+  },
+  {
+    "marca": "",
+    "linea": "CALDOS & CUBOS",
+    "codigo": "12593044",
+    "nombre": "MAGGI CUBO GALLINA A/S 4(42X75.2G) PE",
+    "und": "DS",
+    "piezas": 42,
+    "precio": 138.77
+  },
+  {
+    "marca": "",
+    "linea": "CALDOS & CUBOS",
+    "codigo": "12593053",
+    "nombre": "MAGGI CUBO CARNE 24(26X18.8G) N2 PE",
+    "und": "DS",
+    "piezas": 26,
+    "precio": 16.96
+  },
+  {
+    "marca": "",
+    "linea": "CALDOS & CUBOS",
+    "codigo": "12612796",
+    "nombre": "MAGGI CALDO CUBO GALLINA 20(12X28.2G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 9.79
+  },
+  {
+    "marca": "",
+    "linea": "CUBITOS",
+    "codigo": "12558997",
+    "nombre": "MAGGI CUBITO GALLINA 32X300G PE",
+    "und": "CJ",
+    "piezas": 32,
+    "precio": 324.76
+  },
+  {
+    "marca": "",
+    "linea": "CUBITOS",
+    "codigo": "12559002",
+    "nombre": "MAGGI CUBITO CARNE 32X300G PE",
+    "und": "CJ",
+    "piezas": 32,
+    "precio": 324.76
+  },
+  {
+    "marca": "",
+    "linea": "MAGGI",
+    "codigo": "14506318",
+    "nombre": "MAGCALGALLNPLV12 (488.8 + 490) G PRGALLNPLAS PE",
+    "und": "DS",
+    "piezas": 33,
+    "precio": 31.16
+  },
+  {
+    "marca": "",
+    "linea": "MAGGI",
+    "codigo": "14518232",
+    "nombre": "MAG CUBO GALLN+CALPLV CP 24(488.8+35)GPE",
+    "und": "DS",
+    "piezas": 24,
+    "precio": 16.96
+  },
+  {
+    "marca": "",
+    "linea": "MLPA",
+    "codigo": "12468592",
+    "nombre": "MAGGI MZC LISTA POLLO BRASA 15X45G PE",
+    "und": "CJ",
+    "piezas": 15,
+    "precio": 41.95
+  },
+  {
+    "marca": "",
+    "linea": "MLPA",
+    "codigo": "12518010",
+    "nombre": "MAGGI MEZCLALISTA P/APANAR 6(15X80G) PE",
+    "und": "DS",
+    "piezas": 15,
+    "precio": 35.93
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE CONDENSADA",
+    "codigo": "12516120",
+    "nombre": "NESTLE LECHE CONDENSADA TR 24X393G CFOPE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 142.05
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE CONDENSADA",
+    "codigo": "12608146",
+    "nombre": "NESTLE LECHE COND DOYPACK 36X180G PE",
+    "und": "CJ",
+    "piezas": 36,
+    "precio": 131.1
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE CONDENSADA",
+    "codigo": "14506115",
+    "nombre": "NEST LEC COND 24X393G PRCANDYJARFREE PE",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 152.08
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE CREMA DE LECHE",
+    "codigo": "12026716",
+    "nombre": "NESTLE CREMA DE LECHE LATA 48X160G XA",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 304.38
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE CREMA DE LECHE",
+    "codigo": "12363871",
+    "nombre": "NESTLE CREMA DE LECHE 48X300G PE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 422.89
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE MANJAR",
+    "codigo": "12100279",
+    "nombre": "NESTLE EL MANJAR BOLSA 24X500G XR",
+    "und": "CJ",
+    "piezas": 24,
+    "precio": 254.8
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE MANJAR",
+    "codigo": "12492218",
+    "nombre": "NESTLE EL MANJAR 48X200G PE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 213.11
+  },
+  {
+    "marca": "",
+    "linea": "NESTLE MANJAR",
+    "codigo": "12582131",
+    "nombre": "NESTLE EL MANJAR BOLSA 12X1KG PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 232.37
+  },
+  {
+    "marca": "",
+    "linea": "SOPAS & CREMAS",
+    "codigo": "12521210",
+    "nombre": "MAGGI CREMA ESPARRAGOS 12(12X66G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 36.11
+  },
+  {
+    "marca": "",
+    "linea": "SOPAS & CREMAS",
+    "codigo": "12521212",
+    "nombre": "MAGGI SOPA POLLO FIDEO FORT12(12X57G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 35.97
+  },
+  {
+    "marca": "",
+    "linea": "SOPAS & CREMAS",
+    "codigo": "12521220",
+    "nombre": "MAGGI CREMA HONGOS 12(12X65G) PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 36.11
+  },
+  {
+    "marca": "",
+    "linea": "SOPAS & CREMAS",
+    "codigo": "12616157",
+    "nombre": "MAGGI SOPA CRIOLLA GLLN FD12(12X60G)N1 PE",
+    "und": "DS",
+    "piezas": 12,
+    "precio": 36.96
+  },
+  {
+    "marca": "",
+    "linea": "TOPPING",
+    "codigo": "12581089",
+    "nombre": "NESTLE LCA TOPPING TARRO 48X397G PE",
+    "und": "CJ",
+    "piezas": 48,
+    "precio": 223.61
+  },
+  {
+    "marca": "",
+    "linea": "TOPPING",
+    "codigo": "12602463",
+    "nombre": "NESTLE LCA TOPPING TARRO 96X100G PE",
+    "und": "CJ",
+    "piezas": 96,
+    "precio": 237.82
+  },
+  {
+    "marca": "PANETONES",
+    "linea": "BUON NATALE BOLSA",
+    "codigo": "12562600",
+    "nombre": "D'ON BUON NATALE PANETÓN BOLSA 6X750G PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 115.54
+  },
+  {
+    "marca": "",
+    "linea": "CHOCOTON BOLSA",
+    "codigo": "12562546",
+    "nombre": "D'ONOFRIO CHOCOTON BOLSA 6X450G N1 PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 108.62
+  },
+  {
+    "marca": "",
+    "linea": "CHOCOTON CAJA",
+    "codigo": "12561879",
+    "nombre": "D'ONOFRIO CHOCOTON CAJA PANETON 6X450G PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 118.71
+  },
+  {
+    "marca": "",
+    "linea": "CHOCOTONCITO",
+    "codigo": "12608405",
+    "nombre": "D'ONOFRIO CHOCOTONCITO 12X80G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 40.36
+  },
+  {
+    "marca": "",
+    "linea": "DONOFRIO BOLSA",
+    "codigo": "12565904",
+    "nombre": "D'ONOFRIO PANETON BOLSA 6X880G PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 140.8
+  },
+  {
+    "marca": "",
+    "linea": "DONOFRIO CAJA",
+    "codigo": "12565910",
+    "nombre": "D'ONOFRIO PANETON CAJA 6X880G PE",
+    "und": "CJ",
+    "piezas": 6,
+    "precio": 155.91
+  },
+  {
+    "marca": "",
+    "linea": "PANETONCITO",
+    "codigo": "12608668",
+    "nombre": "D'ONOFRIO PANETONCITO 12X80G PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 40.36
+  },
+  {
+    "marca": "TERRAFERTIL",
+    "linea": "BEB ALMENDRA",
+    "codigo": "12624444",
+    "nombre": "NH BEB ALMENDRA 12X946ML PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEB ALMENDRA",
+    "codigo": "12624445",
+    "nombre": "NH BEB ALMENDRA SINAZR 12X946ML PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEB ALMENDRA",
+    "codigo": "12624474",
+    "nombre": "NH BEB ALM VAINILLA SINAZR12X946MLXW",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEB ALMENDRA",
+    "codigo": "12624488",
+    "nombre": "NH PACK BEB ALMENDRA SINAZR 6(2X946ML)PE",
+    "und": "CJA",
+    "piezas": 6,
+    "precio": 99.9
+  },
+  {
+    "marca": "",
+    "linea": "BEB AVENA",
+    "codigo": "12624503",
+    "nombre": "NH BEB AVENA SINAZR 12X946ML PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEB COCO",
+    "codigo": "12624446",
+    "nombre": "NH BEB COCO 12X946ML XW",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEB COCO",
+    "codigo": "12624473",
+    "nombre": "NH BEB COCO SINAZR 12X946ML PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "BEBIDAS VEGETALES",
+    "codigo": "12624478",
+    "nombre": "NH BEB ORIGEN 12X946ML PE",
+    "und": "CJ",
+    "piezas": 12,
+    "precio": 117.53
+  },
+  {
+    "marca": "",
+    "linea": "INFUSIONES",
+    "codigo": "12624493",
+    "nombre": "NH INFUSION FRUTOS ROJOS 5(20X26G) XW",
+    "und": "CJA",
+    "piezas": 5,
+    "precio": 160.95
+  },
+  {
+    "marca": "",
+    "linea": "INFUSIONES",
+    "codigo": "12624501",
+    "nombre": "NH INFUSION JAMAICA 12(12X26G) XW",
+    "und": "CJA",
+    "piezas": 12,
+    "precio": 106.2
+  },
+  {
+    "marca": "",
+    "linea": "INFUSIONES",
+    "codigo": "12624510",
+    "nombre": "NH INFUSION FRUIT SAMPLER 12(12X29,6G)XW",
+    "und": "CJA",
+    "piezas": 12,
+    "precio": 96.57
+  }
+];
 
     // =============================================================
     //  FUNCIONES AUXILIARES
@@ -1017,7 +2701,7 @@
     }
 
     // =============================================================
-    //  DOM REFERENCIAS
+    //  DOM REFERENCIAS (LOTES)
     // =============================================================
     const brandSelect = document.getElementById('brandSelect');
     const searchInput = document.getElementById('searchInput');
@@ -1040,7 +2724,7 @@
     }
     updateDate();
 
-    // ===== POBLAR LÍNEAS =====
+    // ===== POBLAR LÍNEAS (LOTES) =====
     const lineas = [...new Set(productos.map(p => p.linea))].filter(b => b !== '').sort();
     lineas.forEach(b => {
         const opt = document.createElement('option');
@@ -1049,35 +2733,24 @@
         brandSelect.appendChild(opt);
     });
 
-    // ===== ESTADO DE FILTRO =====
     let hayFiltro = false;
 
-    // ===== FUNCIÓN DE FILTRADO MEJORADA =====
+    // ===== FILTRADO DE LOTES =====
     function filterProducts() {
         const searchVal = searchInput.value.trim();
         const brandVal = brandSelect.value;
 
-        // Normalizar la búsqueda: eliminar tildes, caracteres especiales, y tokenizar
         const normalizedSearch = normalize(searchVal);
         const searchTokens = normalizedSearch.split(/\s+/).filter(t => t.length > 0);
 
         const filtered = productos.filter(p => {
-            // Filtro por línea
             if (brandVal && p.linea !== brandVal) return false;
-
-            // Si no hay búsqueda, incluir todos
             if (searchTokens.length === 0) return true;
-
-            // Preparar el texto del producto (línea + descripción + lote) normalizado
             const productText = normalize(p.linea + ' ' + p.descripcion + ' ' + p.lote);
-            // Verificar que todos los tokens de búsqueda estén en el texto del producto
             return searchTokens.every(token => productText.includes(token));
         });
 
-        // Determinar si hay filtro activo
         hayFiltro = (searchVal !== '' || brandVal !== '');
-
-        // Si hay filtro, mostrar todos los que coinciden; si no, solo los primeros 6
         let displayData = hayFiltro ? filtered : filtered.slice(0, 6);
 
         renderCards(displayData);
@@ -1085,7 +2758,7 @@
         resultCounter.textContent = filtered.length;
     }
 
-    // ===== RENDER TARJETAS =====
+    // ===== RENDER TARJETAS (con precio si existe) =====
     function renderCards(list) {
         if (list.length === 0) {
             cardList.innerHTML = `
@@ -1105,6 +2778,16 @@
             else if (p.estado.includes("Por vencer")) badgeText = "Por vencer";
             else if (p.estado.includes("Vencido")) badgeText = "Vencido";
 
+            // Buscar precio por nombre normalizado
+            let precioStr = '';
+            if (precios.length > 0) {
+                const nombreNorm = normalize(p.descripcion);
+                const encontrado = precios.find(pr => normalize(pr.nombre) === nombreNorm);
+                if (encontrado) {
+                    precioStr = `S/ ${encontrado.precio.toFixed(2)}`;
+                }
+            }
+
             html += `
                 <div class="card" style="animation-delay: ${(idx % 6) * 0.03}s;">
                     <div class="card-top">
@@ -1115,6 +2798,7 @@
                     <div class="card-footer">
                         <span class="lote-tag"><i class="fas fa-hashtag" style="font-size:10px; opacity:0.6;"></i> ${p.lote}</span>
                         <span class="fecha-tag ${estadoClass}"><strong>FV:</strong> ${p.vencimiento}</span>
+                        ${precioStr ? `<span class="price-badge"><i class="fas fa-tag"></i> ${precioStr}</span>` : ''}
                     </div>
                 </div>
             `;
@@ -1136,7 +2820,206 @@
         totalBadge.textContent = total;
     }
 
-    // ===== EVENTOS =====
+    // =============================================================
+    //  ========== PANEL DE PRECIOS (con filtros) ==========
+    // =============================================================
+    const priceBrandSelect = document.getElementById('priceBrandSelect');
+    const priceSearchInput = document.getElementById('priceSearchInput');
+    const applyPriceBtn = document.getElementById('applyPriceFilters');
+    const resetPriceBtn = document.getElementById('resetPriceFilters');
+    const priceTableBody = document.getElementById('priceTableBody');
+    const priceCounter = document.getElementById('priceCounter');
+
+    function populatePriceLines() {
+        const lines = [...new Set(precios.map(p => p.linea))].filter(l => l !== '').sort();
+        priceBrandSelect.innerHTML = '<option value="">Todas</option>';
+        lines.forEach(l => {
+            const opt = document.createElement('option');
+            opt.value = l;
+            opt.textContent = l;
+            priceBrandSelect.appendChild(opt);
+        });
+    }
+
+    function filterPrices() {
+        const searchVal = priceSearchInput.value.trim();
+        const brandVal = priceBrandSelect.value;
+
+        const normalizedSearch = normalize(searchVal);
+        const searchTokens = normalizedSearch.split(/\s+/).filter(t => t.length > 0);
+
+        let filtered = precios.filter(p => {
+            if (brandVal && p.linea !== brandVal) return false;
+            if (searchTokens.length === 0) return true;
+            const text = normalize(p.nombre + ' ' + (p.codigo || ''));
+            return searchTokens.every(token => text.includes(token));
+        });
+
+        renderPriceTable(filtered);
+        priceCounter.textContent = filtered.length + ' productos';
+    }
+
+    function renderPriceTable(list) {
+        if (!list || list.length === 0) {
+            priceTableBody.innerHTML = `<tr><td colspan="5" class="empty-row">No hay precios cargados o no coinciden con el filtro</td></tr>`;
+            return;
+        }
+        let html = '';
+        list.forEach(pr => {
+            html += `
+                <tr>
+                    <td>${pr.linea || ''}</td>
+                    <td>${pr.nombre}</td>
+                    <td>${pr.und || ''}</td>
+                    <td>${pr.piezas || ''}</td>
+                    <td class="precio-col">S/ ${pr.precio.toFixed(2)}</td>
+                </tr>
+            `;
+        });
+        priceTableBody.innerHTML = html;
+    }
+
+    // Eventos del panel de precios
+    applyPriceBtn.addEventListener('click', filterPrices);
+    resetPriceBtn.addEventListener('click', () => {
+        priceSearchInput.value = '';
+        priceBrandSelect.value = '';
+        filterPrices();
+        priceSearchInput.focus();
+    });
+    priceSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') filterPrices();
+    });
+    priceBrandSelect.addEventListener('change', filterPrices);
+
+    // =============================================================
+    //  ========== GENERADOR DE PRECIOS (Importar desde Excel) ==========
+    // =============================================================
+    document.getElementById('importPricesBtn').addEventListener('click', () => {
+        openOverlay('importOverlay');
+    });
+    document.getElementById('closeImport').addEventListener('click', () => closeOverlay('importOverlay'));
+    document.getElementById('importOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeOverlay('importOverlay');
+    });
+
+    document.getElementById('generateCodeBtn').addEventListener('click', () => {
+        const raw = document.getElementById('excelInput').value;
+        if (!raw.trim()) {
+            alert('Pega los datos de precios primero.');
+            return;
+        }
+        const lines = raw.split('\n').filter(line => line.trim() !== '');
+        if (lines.length < 2) {
+            alert('No hay suficientes filas.');
+            return;
+        }
+
+        let sep = '\t';
+        if (lines[0].includes(';')) sep = ';';
+        if (!lines[0].includes('\t') && !lines[0].includes(';')) {
+            // Dividir por múltiples espacios
+            const parts = lines[0].split(/\s{2,}/);
+            if (parts.length >= 5) {
+                const parsed = lines.map(line => line.split(/\s{2,}/).map(s => s.trim()));
+                let startIdx = 0;
+                const first = parsed[0];
+                if (first.some(h => /marca|linea|cod|producto|und|piezas|igv/i.test(h))) {
+                    startIdx = 1;
+                }
+                const dataRows = parsed.slice(startIdx);
+                const final = dataRows.map(row => ({
+                    marca: row[0] || '',
+                    linea: row[1] || '',
+                    codigo: row[2] || '',
+                    nombre: row[3] || '',
+                    und: row[4] || '',
+                    piezas: parseInt(row[5]) || 0,
+                    precio: parseFloat(row[6] ? row[6].replace('S/','').replace(',','.').trim() : 0) || 0
+                })).filter(obj => obj.codigo && obj.nombre);
+                generarYMostrarCodigoPrecios(final);
+                return;
+            } else {
+                alert('No se pudo detectar el separador. Asegúrate de copiar con tabuladores desde Excel.');
+                return;
+            }
+        }
+
+        const firstLine = lines[0];
+        let startIdx = 0;
+        const parts = firstLine.split(sep).map(s => s.trim());
+        if (parts.some(h => /marca|linea|cod|producto|und|piezas|igv/i.test(h))) {
+            startIdx = 1;
+        }
+
+        const final = [];
+        for (let i = startIdx; i < lines.length; i++) {
+            const row = lines[i].split(sep).map(s => s.trim());
+            if (row.length < 6) continue;
+            final.push({
+                marca: row[0] || '',
+                linea: row[1] || '',
+                codigo: row[2] || '',
+                nombre: row[3] || '',
+                und: row[4] || '',
+                piezas: parseInt(row[5]) || 0,
+                precio: parseFloat(row[6] ? row[6].replace('S/','').replace(',','.').trim() : 0) || 0
+            });
+        }
+        if (final.length === 0) {
+            alert('No se pudieron parsear los precios. Verifica el formato.');
+            return;
+        }
+        generarYMostrarCodigoPrecios(final);
+    });
+
+    function generarYMostrarCodigoPrecios(array) {
+        const code = `const precios = ${JSON.stringify(array, null, 2)};`;
+        const container = document.getElementById('generatedCodeContainer');
+        const textarea = document.getElementById('generatedCode');
+        textarea.value = code;
+        container.style.display = 'block';
+        alert('Código generado. Cópialo y reemplaza el array "precios" en el script (línea donde dice "PEGA AQUÍ EL ARRAY DE PRECIOS").');
+    }
+
+    document.getElementById('clearImportBtn').addEventListener('click', () => {
+        document.getElementById('excelInput').value = '';
+        document.getElementById('generatedCodeContainer').style.display = 'none';
+        document.getElementById('generatedCode').value = '';
+    });
+
+    // =============================================================
+    //  ========== ABRIR / CERRAR MODALES ==========
+    // =============================================================
+    function openOverlay(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    function closeOverlay(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // ===== ABRIR LISTA DE PRECIOS =====
+    document.getElementById('priceListBtn').addEventListener('click', () => {
+        populatePriceLines();
+        filterPrices();
+        openOverlay('priceListOverlay');
+    });
+    document.getElementById('closePriceList').addEventListener('click', () => closeOverlay('priceListOverlay'));
+    document.getElementById('priceListOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeOverlay('priceListOverlay');
+    });
+
+    // =============================================================
+    //  ========== EVENTOS DE FILTRO DE LOTES ==========
+    // =============================================================
     applyBtn.addEventListener('click', filterProducts);
     resetBtn.addEventListener('click', () => {
         searchInput.value = '';
@@ -1149,8 +3032,19 @@
     });
     brandSelect.addEventListener('change', filterProducts);
 
-    // ===== CARGA INICIAL =====
+    // =============================================================
+    //  ========== CARGA INICIAL ==========
+    // =============================================================
     filterProducts();
+
+    // Si ya hay precios, actualizar líneas y tabla
+    if (precios.length > 0) {
+        populatePriceLines();
+        filterPrices();
+    }
+
+    console.log('Productos cargados:', productos.length);
+    console.log('Precios cargados:', precios.length);
 </script>
 </body>
 </html>
