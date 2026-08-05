@@ -645,7 +645,6 @@
             color: #64748b;
             padding: 20px;
         }
-        /* Columna Nombre más flexible */
         .price-table .nombre-col {
             word-break: break-word;
             max-width: 140px;
@@ -895,8 +894,8 @@
 
 <script>
     // =============================================================
-    //  ========== PRODUCTOS ==========
-    //  (Aquí van todos tus productos, los he incluido completos)
+    //  ========== PRODUCTOS (LOTES) ==========
+    //  (Aquí van todos tus productos, tal como los tienes)
     // =============================================================
     const productos = [
     { linea: "CHOCOLATES", descripcion: "12003780", lote: "12003780", vencimiento: "15/10/2026", estado: "A tiempo" },
@@ -1152,7 +1151,7 @@
 
     // =============================================================
     //  ========== PRECIOS ==========
-    //  (Aquí va tu array de precios completo, ya lo tienes)
+    //  (Array completo de precios, tal como lo tienes)
     // =============================================================
     const precios = [
   {
@@ -2540,7 +2539,12 @@
 
     let hayFiltro = false;
 
-    // ===== FILTRADO DE LOTES (busca también en el nombre del precio) =====
+    // =============================================================
+    //  ========== FUNCIONES CORREGIDAS ==========
+    //  (FILTRADO Y RENDERIZADO DE LOTES)
+    // =============================================================
+
+    // ===== FILTRADO DE LOTES (busca también en el nombre del producto) =====
     function filterProducts() {
         const searchVal = searchInput.value.trim();
         const brandVal = brandSelect.value;
@@ -2548,10 +2552,10 @@
         const normalizedSearch = normalize(searchVal);
         const searchTokens = normalizedSearch.split(/\s+/).filter(t => t.length > 0);
 
-        // Mapa: código del precio -> nombre del producto
-        const precioMap = {};
+        // Mapa: código -> nombre del producto (desde precios)
+        const nombreMap = {};
         precios.forEach(pr => {
-            precioMap[pr.codigo] = pr.nombre;
+            nombreMap[pr.codigo] = pr.nombre;
         });
 
         const filtered = productos.filter(p => {
@@ -2561,10 +2565,10 @@
             // Texto base: línea + código + lote
             let productText = normalize(p.linea + ' ' + p.descripcion + ' ' + p.lote);
 
-            // Si existe un precio con este código, añadimos su nombre a la búsqueda
-            const nombrePrecio = precioMap[p.descripcion];
-            if (nombrePrecio) {
-                productText += ' ' + normalize(nombrePrecio);
+            // Agregar el nombre comercial si existe
+            const nombre = nombreMap[p.descripcion];
+            if (nombre) {
+                productText += ' ' + normalize(nombre);
             }
 
             return searchTokens.every(token => productText.includes(token));
@@ -2578,7 +2582,7 @@
         resultCounter.textContent = filtered.length;
     }
 
-    // ===== RENDER TARJETAS (muestra el precio correctamente) =====
+    // ===== RENDER TARJETAS (muestra el nombre y el precio) =====
     function renderCards(list) {
         if (list.length === 0) {
             cardList.innerHTML = `
@@ -2590,10 +2594,12 @@
             return;
         }
 
-        // Mapa: código -> precio (numérico)
+        // Mapas: código -> precio y código -> nombre
         const precioMap = {};
+        const nombreMap = {};
         precios.forEach(pr => {
             precioMap[pr.codigo] = pr.precio;
+            nombreMap[pr.codigo] = pr.nombre;
         });
 
         let html = '';
@@ -2604,7 +2610,8 @@
             else if (p.estado.includes("Por vencer")) badgeText = "Por vencer";
             else if (p.estado.includes("Vencido")) badgeText = "Vencido";
 
-            // Buscar precio por código (p.descripcion)
+            // Obtener nombre y precio
+            const nombreProducto = nombreMap[p.descripcion] || p.descripcion; // fallback al código
             let precioStr = '';
             const precioVal = precioMap[p.descripcion];
             if (precioVal !== undefined) {
@@ -2617,7 +2624,7 @@
                         <span class="badge-linea">${p.linea}</span>
                         <span class="badge-estado ${estadoClass}">${badgeText}</span>
                     </div>
-                    <div class="product-desc">${p.descripcion}</div>
+                    <div class="product-desc">${nombreProducto}</div>
                     <div class="card-footer">
                         <span class="lote-tag"><i class="fas fa-hashtag" style="font-size:10px; opacity:0.6;"></i> ${p.lote}</span>
                         <span class="fecha-tag ${estadoClass}"><strong>FV:</strong> ${p.vencimiento}</span>
@@ -2644,7 +2651,7 @@
     }
 
     // =============================================================
-    //  ========== PANEL DE PRECIOS (con filtros y límite inicial) ==========
+    //  ========== PANEL DE PRECIOS (NO MODIFICADO) ==========
     // =============================================================
     const priceBrandSelect = document.getElementById('priceBrandSelect');
     const priceSearchInput = document.getElementById('priceSearchInput');
@@ -2707,7 +2714,7 @@
         priceTableBody.innerHTML = html;
     }
 
-    // Eventos
+    // Eventos de precios
     applyPriceBtn.addEventListener('click', filterPrices);
     resetPriceBtn.addEventListener('click', () => {
         priceSearchInput.value = '';
