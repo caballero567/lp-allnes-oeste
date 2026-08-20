@@ -8007,9 +8007,11 @@
     const globalPct = document.getElementById('globalPct');
     const globalRing = document.getElementById('globalRing');
 
-    function parseNum(s) {
-        const n = parseInt(String(s).replace(/[^\d]/g, ''), 10);
-        return isNaN(n) ? 0 : n;
+   function parseNum(s) {
+    if (s === undefined || s === null) return 0;
+    let str = String(s).replace(/[^\d.]/g, ''); // conserva dígitos y punto decimal
+    const n = parseFloat(str);
+    return isNaN(n) ? 0 : n;
     }
     function parsePct(s) {
         const n = parseFloat(String(s).replace('%', '').replace(',', '.'));
@@ -8338,4 +8340,3 @@
 </script>
 </body>
 </html>
-
