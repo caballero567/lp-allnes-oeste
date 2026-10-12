@@ -7430,11 +7430,6 @@
             return;
         }
 
-        const precioMap = {};
-        precios.forEach(pr => {
-            precioMap[normalize(pr.nombre)] = pr.precio;
-        });
-
         let html = '';
         list.forEach((p, idx) => {
             const estadoClass = getEstadoClass(p.estado);
@@ -7447,9 +7442,9 @@
 
             const nombreProducto = p.descripcion;
             let precioStr = '';
-            const precioVal = (p.precio !== undefined && p.precio !== null) ? p.precio : precioMap[normalize(p.descripcion)];
-            if (precioVal !== undefined && precioVal !== null && !isNaN(precioVal)) {
-                precioStr = `S/ ${Number(precioVal).toFixed(2)}`;
+            const precioVal = Number(p.precio);
+            if (p.precio !== null && p.precio !== undefined && !isNaN(precioVal)) {
+                precioStr = `S/ ${precioVal.toFixed(2)}`;
             }
 
             html += `
