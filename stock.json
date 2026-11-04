@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-04 16:34:53",
+  "generado": "2026-11-04 16:40:59",
   "fuente": "ERP Integrens - VEGA OESTE (stock disponible)",
   "productos": {
     "600011": {
@@ -303,7 +303,7 @@
       "d": "NESTLE SUBLIME EXTREMO 24(15X50G) PE"
     },
     "12526089": {
-      "n": 2346.011,
+      "n": 2296.011,
       "u": "CJ",
       "d": "IDEAL CREMOSITA MZC LAC 24X390G PE"
     },
@@ -348,12 +348,12 @@
       "d": "D'ONOFRIO CHOCOTON CAJA PANETON 6X450G PE"
     },
     "12565904": {
-      "n": 9264.005,
+      "n": 9641.005,
       "u": "CJ",
       "d": "D'ONOFRIO PANETON BOLSA 6X880G PE"
     },
     "12565910": {
-      "n": 5072.0,
+      "n": 5051.0,
       "u": "CJ",
       "d": "D'ONOFRIO PANETON CAJA 6X880G PE"
     },
@@ -378,7 +378,7 @@
       "d": "NESTLE LCA TOPPING TARRO 48X397G PE"
     },
     "12582131": {
-      "n": 127.003,
+      "n": 127.011,
       "u": "CJ",
       "d": "NESTLE EL MANJAR BOLSA 12X1KG PE"
     },
@@ -673,12 +673,12 @@
       "d": "IDEAL CREMOSITA 24X390G + MAGGI GALLINA 7G"
     },
     "14531814": {
-      "n": 3981.0,
+      "n": 4766.0,
       "u": "CJ",
       "d": "D'ON BUON NATALE PANETÓN BOLSA 6X800G PE"
     },
     "14531832": {
-      "n": 25.004,
+      "n": 20.004,
       "u": "CJ",
       "d": "D'ON BUON NATALE PANETÓN CAJA 6X800G PE"
     }
