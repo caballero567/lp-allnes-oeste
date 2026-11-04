@@ -1,15 +1,15 @@
 {
-  "generado": "2026-11-04 15:47:44",
+  "generado": "2026-11-04 15:49:48",
   "fuente": "ERP Integrens - VEGA OESTE (stock disponible)",
   "productos": {
     "600011": {
       "n": 981.0,
-      "u": "CJ",
+      "u": "DS",
       "d": "NESCAFE KIRMA TIRA 12(16X7G) + KIRMA (8X2G)"
     },
     "600012": {
       "n": 1041.0,
-      "u": "CJ",
+      "u": "DS",
       "d": "NESCAFÉ KIRMA STRIP 8(10X14G) + KIRMA (5X2G)"
     },
     "12003780": {
@@ -74,7 +74,7 @@
     },
     "12348027": {
       "n": 714.0,
-      "u": "CJ",
+      "u": "DS",
       "d": "NESTLE SUBLIME CHOCOLATE 28(30X14G) PE"
     },
     "12363871": {
@@ -564,12 +564,12 @@
     },
     "12624493": {
       "n": 5.0,
-      "u": "CJA",
+      "u": "CJ",
       "d": "NH INFUSION FRUTOS ROJOS 5(20X26G) XW"
     },
     "12624501": {
       "n": 5.0,
-      "u": "CJA",
+      "u": "CJ",
       "d": "NH INFUSION JAMAICA 12(12X26G) XW"
     },
     "12624503": {
@@ -579,7 +579,7 @@
     },
     "12624510": {
       "n": 3.0,
-      "u": "CJA",
+      "u": "CJ",
       "d": "NH INFUSION FRUIT SAMPLER 12(12X29,6G)XW"
     },
     "12624642": {
@@ -589,7 +589,7 @@
     },
     "12624841": {
       "n": 2879.0,
-      "u": "CJ",
+      "u": "DS",
       "d": "NESTLE TRIANGULO CLASICO 24(20X29G) PE"
     },
     "12624851": {
@@ -664,7 +664,7 @@
     },
     "14518232": {
       "n": 9.013,
-      "u": "DS",
+      "u": "CJ",
       "d": "MAG CUBO GALLN+CALPLV CP 24(488.8+35)GPE"
     },
     "14521679": {
