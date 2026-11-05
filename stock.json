@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-05 11:35:22",
+  "generado": "2026-11-05 11:41:30",
   "fuente": "ERP Integrens - VEGA OESTE (stock disponible)",
   "productos": {
     "600011": {
@@ -8,7 +8,7 @@
       "d": "NESCAFE KIRMA TIRA 12(16X7G) + KIRMA (8X2G)"
     },
     "600012": {
-      "n": 1035.0,
+      "n": 1034.0,
       "u": "DS",
       "d": "NESCAFÉ KIRMA STRIP 8(10X14G) + KIRMA (5X2G)"
     },
@@ -48,7 +48,7 @@
       "d": "NESTLE PRINCESA CHOC CAJA 24(16X8G) PE"
     },
     "12276820": {
-      "n": 1581.0,
+      "n": 1580.0,
       "u": "DS",
       "d": "LENTEJAS CONFITE CHOC CAJA 24(20X30G) PE"
     },
@@ -58,22 +58,22 @@
       "d": "CHOCAPIC CEREAL 26X90G PE"
     },
     "12303346": {
-      "n": 198.009,
+      "n": 198.007,
       "u": "CJ",
       "d": "NESCAFE KIRMA DOY PACK ZIPPER 24X45G PE"
     },
     "12331290": {
-      "n": 645.0,
+      "n": 643.0,
       "u": "DS",
       "d": "NESQUIK OPTISTART CHOC TIRA15(12X13G) PE"
     },
     "12338581": {
-      "n": 1092.0,
+      "n": 1091.0,
       "u": "DS",
       "d": "SUBLIME CHOCOLATE GALLETA 12(24X28G) PE"
     },
     "12348027": {
-      "n": 686.0,
+      "n": 682.0,
       "u": "DS",
       "d": "NESTLE SUBLIME CHOCOLATE 28(30X14G) PE"
     },
@@ -118,7 +118,7 @@
       "d": "NESTLE BESOSDEMOZA CHOC 24(9X24G) PE"
     },
     "12457890": {
-      "n": 56.001,
+      "n": 56.0,
       "u": "CJ",
       "d": "NESTLE BESOS DE MOZA CHOC 8X480G PE"
     },
@@ -158,7 +158,7 @@
       "d": "FITNESS CEREAL 16X570G PE"
     },
     "12492218": {
-      "n": 153.038,
+      "n": 153.035,
       "u": "CJ",
       "d": "NESTLE EL MANJAR 48X200G PE"
     },
@@ -188,7 +188,7 @@
       "d": "COCOSETTE MAXI WAFER 6(24X50G) PE"
     },
     "12499462": {
-      "n": 3086.0,
+      "n": 3081.0,
       "u": "DS",
       "d": "MOROCHAS GALLETA TACO 18(6X75G) PE"
     },
@@ -213,7 +213,7 @@
       "d": "CORN FLAKES CEREAL 14X405G N3 XW"
     },
     "12516120": {
-      "n": 1298.004,
+      "n": 1297.01,
       "u": "CJ",
       "d": "NESTLE LECHE CONDENSADA TR 24X393G CFOPE"
     },
@@ -238,7 +238,7 @@
       "d": "NESQUIK OPTISTART CHOCOLATE 12X470G PE"
     },
     "12517277": {
-      "n": 29.045,
+      "n": 29.042,
       "u": "CJ",
       "d": "NESQUIK OPTISTART CHOCOLATE 48X190G PE"
     },
@@ -263,7 +263,7 @@
       "d": "MAGGI CREMA ESPARRAGOS 12(12X66G) PE"
     },
     "12521212": {
-      "n": 246.011,
+      "n": 246.008,
       "u": "DS",
       "d": "MAGGI SOPA POLLO FIDEO FORT12(12X57G) PE"
     },
@@ -303,12 +303,12 @@
       "d": "NESTLE SUBLIME EXTREMO 24(15X50G) PE"
     },
     "12526089": {
-      "n": 4348.02,
+      "n": 4340.011,
       "u": "CJ",
       "d": "IDEAL CREMOSITA MZC LAC 24X390G PE"
     },
     "12526463": {
-      "n": 3.002,
+      "n": 2.02,
       "u": "CJ",
       "d": "IDEAL LIGHT MZC LAC 24X390G PE"
     },
@@ -323,7 +323,7 @@
       "d": "NESQUIK OPTISTART CHOC TR 24X380G PE"
     },
     "12535266": {
-      "n": 1903.018,
+      "n": 1903.006,
       "u": "CJ",
       "d": "IDEAL AMANECER MZC LAC 24X390G PE"
     },
@@ -348,12 +348,12 @@
       "d": "D'ONOFRIO CHOCOTON CAJA PANETON 6X450G PE"
     },
     "12565904": {
-      "n": 9577.005,
+      "n": 9570.005,
       "u": "CJ",
       "d": "D'ONOFRIO PANETON BOLSA 6X880G PE"
     },
     "12565910": {
-      "n": 4982.004,
+      "n": 4982.003,
       "u": "CJ",
       "d": "D'ONOFRIO PANETON CAJA 6X880G PE"
     },
@@ -363,7 +363,7 @@
       "d": "NESTLE CORN FLAKES CEREAL 8X740G N1 XW"
     },
     "12572845": {
-      "n": 3568.0,
+      "n": 3567.0,
       "u": "DS",
       "d": "NESCAFE TRADICION TIRA 12(18X7G) PE"
     },
@@ -413,7 +413,7 @@
       "d": "MAGGI CALDO POLVO CARNE 80(10X7G)N4 PE"
     },
     "12591666": {
-      "n": 2831.0,
+      "n": 2825.0,
       "u": "DS",
       "d": "NESTLE SUBLIME CLASICO 24(24X26G) PE"
     },
@@ -448,7 +448,7 @@
       "d": "NESCAFE CAPPUCCINO 6(8X14G) XR"
     },
     "12602463": {
-      "n": 119.061,
+      "n": 119.055,
       "u": "CJ",
       "d": "NESTLE LCA TOPPING TARRO 96X100G PE"
     },
@@ -468,12 +468,12 @@
       "d": "D'ONOFRIO PANETONCITO 12X80G PE"
     },
     "12611025": {
-      "n": 2622.0,
+      "n": 2617.0,
       "u": "DS",
       "d": "NESCAFE KIRMA TIRA 12(16X7G) PE"
     },
     "12611517": {
-      "n": 1922.0,
+      "n": 1921.0,
       "u": "DS",
       "d": "NAN 2 FORM LAC LIQUIDA 8(6X390G) N1 PE"
     },
@@ -483,7 +483,7 @@
       "d": "NAN 2 FORM LAC LIQUIDA 24X390G N1 PE"
     },
     "12612796": {
-      "n": 194.0,
+      "n": 190.0,
       "u": "DS",
       "d": "MAGGI CALDO CUBO GALLINA 20(12X28.2G) PE"
     },
@@ -513,12 +513,12 @@
       "d": "MILO TIRAS 5(8X48G) PE"
     },
     "12622133": {
-      "n": 1898.0,
+      "n": 1896.0,
       "u": "DS",
       "d": "MILO ACTIV-GO 6(24X16G) PE"
     },
     "12623363": {
-      "n": 166.022,
+      "n": 166.02,
       "u": "CJ",
       "d": "NESCAFE TRADICION DP ZIPPER 24X45G N1 PE"
     },
@@ -543,12 +543,12 @@
       "d": "NESCAFE KIRMA DOYPACK 16X140G PE"
     },
     "12624444": {
-      "n": 32.0,
+      "n": 31.006,
       "u": "CJ",
       "d": "NH BEB ALMENDRA 12X946ML PE"
     },
     "12624445": {
-      "n": 117.008,
+      "n": 117.001,
       "u": "CJ",
       "d": "NH BEB ALMENDRA SINAZR 12X946ML PE"
     },
@@ -583,17 +583,17 @@
       "d": "NH INFUSION FRUIT SAMPLER 12(12X29,6G)XW"
     },
     "12624642": {
-      "n": 420.001,
+      "n": 419.008,
       "u": "CJ",
       "d": "NESCAFÉ KIRMA 12X180G PE"
     },
     "12624841": {
-      "n": 2795.0,
+      "n": 2793.0,
       "u": "DS",
       "d": "NESTLE TRIANGULO CLASICO 24(20X29G) PE"
     },
     "12624851": {
-      "n": 2032.0,
+      "n": 2030.0,
       "u": "DS",
       "d": "ECCO SACHET 10(14X10G) PE"
     },
@@ -613,12 +613,12 @@
       "d": "NESTLE SUBLIME POWER 33(6X25G) N1 PE"
     },
     "13465905": {
-      "n": 3150.0,
+      "n": 3149.0,
       "u": "DS",
       "d": "NESCAFÉ KIRMA STRIP 8(10X14G) PE"
     },
     "13503347": {
-      "n": 3153.0,
+      "n": 3152.0,
       "u": "DS",
       "d": "NESCAFE TRADICION TIRA 8(10X14G) PE"
     },
@@ -633,12 +633,12 @@
       "d": "NEST TRGL CLASSIC TRAD 24(20X29G) PE"
     },
     "14495976": {
-      "n": 4920.0,
+      "n": 4916.0,
       "u": "DS",
       "d": "MRHS BISCUITS TRAD 22(12X30G) PE"
     },
     "14505965": {
-      "n": 1713.0,
+      "n": 1712.0,
       "u": "DS",
       "d": "NESTLE SBLM CRISPY 12(20X20G) PE"
     },
@@ -663,7 +663,7 @@
       "d": "NESCAFE GOLD 12(10X11G)"
     },
     "14518232": {
-      "n": 9.011,
+      "n": 9.01,
       "u": "CJ",
       "d": "MAG CUBO GALLN+CALPLV CP 24(488.8+35)GPE"
     },
