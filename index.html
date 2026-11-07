@@ -297,6 +297,90 @@
     .chip .dot{display:none;}
     .card{padding:12px;}
   }
+  /* ===== POCO STOCK ===== */
+  body.ps-lock{overflow:hidden;}
+  body.ps-has-fab .app{padding-bottom:108px;}
+  .ps-fab{position:fixed;z-index:60;right:max(14px,calc(50vw - 246px));
+    bottom:calc(16px + env(safe-area-inset-bottom));display:none;align-items:center;gap:8px;
+    border:none;border-radius:40px;padding:12px 14px 12px 16px;cursor:pointer;
+    background:linear-gradient(135deg,var(--accent-strong),var(--accent));color:#fff;
+    font-family:inherit;font-size:12px;font-weight:800;letter-spacing:.3px;
+    box-shadow:0 12px 32px rgba(59,130,246,.38),inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .15s,filter .15s;}
+  .ps-fab.on{display:flex;}
+  .ps-fab:hover{filter:brightness(1.08);}
+  .ps-fab:active{transform:scale(.96);}
+  .ps-fab i{font-size:14px;}
+  .ps-fab-count{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;
+    background:var(--ok);color:#062A20;border:1px solid rgba(255,255,255,.35);border-radius:20px;
+    font-family:var(--mono);font-size:11px;font-weight:800;}
+  .ps-fab-zero{position:absolute;right:-5px;top:-7px;display:none;place-items:center;
+    min-width:18px;height:18px;padding:0 4px;background:var(--danger);color:#fff;border-radius:20px;
+    font-family:var(--mono);font-size:9px;font-weight:800;border:2px solid var(--bg);}
+  .ps-fab-zero.on{display:grid;}
+  .ps-overlay{position:fixed;inset:0;z-index:70;background:rgba(2,6,12,.62);
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+    opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;}
+  .ps-overlay.open{opacity:1;visibility:visible;}
+  .ps-sheet{position:fixed;z-index:71;left:50%;bottom:0;width:min(100%,520px);max-height:88vh;
+    display:flex;flex-direction:column;background:var(--surface-1);
+    border:1px solid var(--border-strong);border-bottom:none;border-radius:24px 24px 0 0;
+    box-shadow:0 -24px 70px rgba(0,0,0,.7);transform:translate(-50%,105%);
+    visibility:hidden;
+    transition:transform .26s cubic-bezier(.22,1,.36,1),visibility .26s;
+    padding-bottom:env(safe-area-inset-bottom);}
+  .ps-sheet.open{transform:translate(-50%,0);visibility:visible;}
+  .ps-grabber{width:42px;height:4px;flex:0 0 auto;border-radius:4px;background:var(--surface-3);margin:9px auto 2px;}
+  .ps-head{padding:6px 16px 10px;flex:0 0 auto;}
+  .ps-title-row{display:flex;align-items:flex-start;gap:10px;}
+  .ps-ico{width:34px;height:34px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;
+    background:var(--accent-soft);color:var(--accent);font-size:14px;border:1px solid rgba(96,165,250,.25);}
+  .ps-title{font-size:16px;font-weight:800;letter-spacing:-.3px;}
+  .ps-sub{font-size:10.5px;color:var(--text-3);margin-top:2px;}
+  .ps-close{margin-left:auto;width:30px;height:30px;flex:0 0 auto;border-radius:50%;border:1px solid var(--border);
+    background:var(--surface-2);color:var(--text-2);display:grid;place-items:center;font-size:12px;
+    cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s;}
+  .ps-close:hover{color:var(--text-1);border-color:var(--border-strong);}
+  .ps-tabs{display:flex;gap:7px;padding:0 16px 10px;flex:0 0 auto;}
+  .ps-tab{flex:1;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);
+    border-radius:11px;padding:8px 10px;font-family:inherit;font-size:10.5px;font-weight:700;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;}
+  .ps-tab .n{font-family:var(--mono);font-size:10px;padding:1px 6px;border-radius:20px;background:rgba(255,255,255,.06);}
+  .ps-tab.active{background:var(--accent-soft);border-color:rgba(96,165,250,.38);color:var(--accent);}
+  .ps-tab.active .n{background:rgba(96,165,250,.18);}
+  .ps-tab.danger.active{background:var(--danger-soft);border-color:rgba(248,113,113,.35);color:var(--danger);}
+  .ps-tab.danger.active .n{background:rgba(248,113,113,.18);}
+  .ps-search{display:flex;align-items:center;gap:7px;margin:0 16px 9px;padding:9px 12px;flex:0 0 auto;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:40px;color:var(--text-3);
+    transition:border-color .15s,box-shadow .15s;}
+  .ps-search:focus-within{border-color:var(--accent);box-shadow:var(--ring);}
+  .ps-search i{font-size:10px;}
+  .ps-search input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--text-1);
+    font-family:inherit;font-size:11px;font-weight:500;}
+  .ps-search input::placeholder{color:var(--text-3);}
+  .ps-list{overflow-y:auto;padding:0 10px calc(14px + env(safe-area-inset-bottom));
+    scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+  .ps-list-h{display:flex;justify-content:space-between;align-items:center;padding:8px 6px 6px;
+    font-size:9px;font-weight:700;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;}
+  .ps-row{display:flex;gap:10px;align-items:center;padding:10px 9px;border-bottom:1px solid var(--border);}
+  .ps-row:last-child{border-bottom:none;}
+  .ps-main{flex:1;min-width:0;}
+  .ps-top{display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+  .ps-linea{font-family:var(--mono);font-size:7.5px;font-weight:700;color:var(--accent);
+    background:var(--accent-soft);padding:2px 5px;border-radius:4px;white-space:nowrap;}
+  .ps-cod{font-family:var(--mono);font-size:8.5px;color:var(--text-3);}
+  .ps-name{font-size:11px;font-weight:700;line-height:1.22;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ps-val{flex:0 0 86px;text-align:right;}
+  .ps-val-line{display:flex;align-items:baseline;justify-content:flex-end;gap:3px;line-height:1;}
+  .ps-num{font-family:var(--mono);font-size:17px;font-weight:800;letter-spacing:-.6px;color:var(--ok);}
+  .ps-unit{font-family:var(--mono);font-size:9px;font-weight:700;color:var(--text-2);}
+  .ps-sub2{font-family:var(--mono);font-size:8.5px;font-weight:700;color:var(--text-2);margin-top:3px;white-space:nowrap;}
+  .ps-row.zero .ps-num,.ps-row.zero .ps-unit,.ps-row.zero .ps-sub2{color:var(--danger);}
+  .ps-row.zero .ps-linea{color:var(--danger);background:var(--danger-soft);}
+  .ps-empty{padding:28px 12px;text-align:center;color:var(--text-3);font-size:11px;font-weight:600;}
+  @media (max-width:520px){
+    .ps-fab{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));}
+  }
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
 </style>
 </head>
@@ -377,6 +461,37 @@
   <div class="footer">
     <span class="footer-note"><i class="fas fa-chart-line"></i> Gestión de Lotes · <span id="totalBadge">0</span> lotes</span>
     <button class="footer-btn" id="importPricesBtn"><i class="fas fa-upload"></i> Importar Precios</button>
+  </div>
+</div>
+
+<!-- ===== POCO STOCK ===== -->
+<button id="psFab" class="ps-fab" type="button" aria-label="Ver productos con poco stock" aria-expanded="false" aria-controls="psSheet">
+  <i class="fas fa-exclamation-triangle"></i>
+  <span>POCO STOCK</span>
+  <span class="ps-fab-count" id="psFabLow">0</span>
+  <span class="ps-fab-zero" id="psFabZero">0</span>
+</button>
+<div class="ps-overlay" id="psOverlay"></div>
+<div class="ps-sheet" id="psSheet" role="dialog" aria-modal="true" aria-labelledby="psTitle" aria-hidden="true">
+  <div class="ps-grabber"></div>
+  <div class="ps-head">
+    <div class="ps-title-row">
+      <div class="ps-ico"><i class="fas fa-exclamation-triangle"></i></div>
+      <div>
+        <div class="ps-title" id="psTitle">Poco stock</div>
+        <div class="ps-sub">Stock real en DS / CJ</div>
+      </div>
+      <button class="ps-close" id="psClose" type="button" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <div class="ps-tabs">
+    <button class="ps-tab active" id="psTabLow" type="button" data-pst="low">Por agotarse <span class="n" id="psTabLowN">0</span></button>
+    <button class="ps-tab danger" id="psTabZero" type="button" data-pst="zero">Sin stock <span class="n" id="psTabZeroN">0</span></button>
+  </div>
+  <div class="ps-search"><i class="fas fa-search"></i><input id="psSearch" type="text" placeholder="Buscar producto o código..." autocomplete="off" /></div>
+  <div class="ps-list" id="psList">
+    <div class="ps-list-h" id="psListH"><span>Más críticos primero</span><span>stock</span></div>
+    <div id="psRows"></div>
   </div>
 </div>
 
@@ -7402,7 +7517,210 @@
             stockPorNombre = null;
         }
         try { filterProducts(); } catch (e) { }
+        try { psRefresh(); } catch (e) { }
     }
+
+    // =============================================================
+    //  POCO STOCK
+    // =============================================================
+    const PS_LIMITE_CAJAS = 7;
+    let psTabActiva = 'low';
+    let psQuery = '';
+    let psData = { low: [], zero: [], listo: false };
+    let psUI = null;
+
+    function psEls() {
+        if (!psUI) {
+            psUI = {
+                fab: document.getElementById('psFab'),
+                fabLow: document.getElementById('psFabLow'),
+                fabZero: document.getElementById('psFabZero'),
+                overlay: document.getElementById('psOverlay'),
+                sheet: document.getElementById('psSheet'),
+                close: document.getElementById('psClose'),
+                tabLow: document.getElementById('psTabLow'),
+                tabZero: document.getElementById('psTabZero'),
+                tabLowN: document.getElementById('psTabLowN'),
+                tabZeroN: document.getElementById('psTabZeroN'),
+                search: document.getElementById('psSearch'),
+                listH: document.getElementById('psListH'),
+                rows: document.getElementById('psRows')
+            };
+        }
+        return psUI;
+    }
+
+    function psEsc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
+    // El factor del empaque es el primer numero antes del parentesis.
+    function psFactor(desc) {
+        const m = String(desc || '').match(/(\d+(?:[.,]\d+)?)\s*\(/);
+        if (!m) return null;
+        const f = parseFloat(m[1].replace(',', '.'));
+        return (isFinite(f) && f > 0) ? f : null;
+    }
+
+    function psCodigo(p) {
+        if (!stockAuto) return '';
+        const nombre = normalize((p && p.descripcion) ? p.descripcion : '');
+        const cod = indiceCodigosPagina()[nombre];
+        if (cod && stockAuto[cod]) return String(cod);
+        const clave = stockPorNombre ? stockPorNombre[nombre] : null;
+        if (clave && stockAuto[clave]) return String(clave);
+        return '';
+    }
+
+    function psConstruir() {
+        const low = [];
+        const zero = [];
+        if (stockAuto === null) {
+            psData = { low: low, zero: zero, listo: false };
+            return;
+        }
+        const vistos = {};
+        (productos || []).forEach(function (p) {
+            const cod = psCodigo(p);
+            if (!cod || vistos[cod]) return;
+            const sc = stockAuto[cod];
+            const n = Number(sc && sc.n);
+            if (!sc || !isFinite(n)) return;
+            vistos[cod] = true;
+            const u = String(sc.u || '').trim().toUpperCase();
+            const factor = (u === 'DS') ? psFactor(p.descripcion) : null;
+            // Deteccion interna en cajas: DS / factor del empaque; CJ ya viene en cajas.
+            const cajas = (u === 'DS' && factor) ? n / factor : n;
+            const fila = {
+                cod: cod,
+                desc: p.descripcion || (sc.d || ''),
+                linea: p.linea || '',
+                u: u,
+                n: n,
+                factor: factor,
+                cajas: cajas
+            };
+            if (n <= 0) zero.push(fila);
+            else if (cajas < PS_LIMITE_CAJAS) low.push(fila);
+        });
+        low.sort(function (a, b) { return a.cajas - b.cajas || a.desc.localeCompare(b.desc); });
+        zero.sort(function (a, b) { return a.desc.localeCompare(b.desc); });
+        psData = { low: low, zero: zero, listo: true };
+    }
+
+    function psUnidad(f) {
+        // En CJ solo se usa la etiqueta CJ cuando completa 1 caja; si no, son unidades.
+        if (f.u === 'CJ' && f.n < 1) return 'unidades';
+        return f.u || '';
+    }
+
+    function psSub(f) {
+        if (f.n <= 0) return '';
+        if (f.u === 'DS' && f.factor) {
+            if (f.cajas >= 1) {
+                const txt = fmtStock(f.cajas);
+                return txt + ' ' + (Number(txt) === 1 ? 'caja' : 'cajas');
+            }
+            return 'Menos de 1 caja';
+        }
+        return '';
+    }
+
+    function psRender() {
+        const ui = psEls();
+        const low = psData.low;
+        const zero = psData.zero;
+        const hay = psData.listo && (low.length + zero.length) > 0;
+
+        ui.fabLow.textContent = low.length;
+        ui.fabZero.textContent = zero.length;
+        ui.fabZero.classList.toggle('on', zero.length > 0);
+        ui.tabLowN.textContent = low.length;
+        ui.tabZeroN.textContent = zero.length;
+        ui.fab.classList.toggle('on', hay);
+        document.body.classList.toggle('ps-has-fab', hay);
+
+        const enCero = psTabActiva === 'zero';
+        ui.tabLow.classList.toggle('active', !enCero);
+        ui.tabZero.classList.toggle('active', enCero);
+        ui.listH.innerHTML = enCero
+            ? '<span>Sin stock</span><span>stock</span>'
+            : '<span>Más críticos primero</span><span>stock</span>';
+
+        const lista = enCero ? zero : low;
+        const q = normalize(psQuery || '');
+        const filtradas = q ? lista.filter(function (f) {
+            return normalize(f.desc).indexOf(q) !== -1
+                || normalize(f.cod).indexOf(q) !== -1
+                || normalize(f.linea).indexOf(q) !== -1;
+        }) : lista;
+
+        if (!filtradas.length) {
+            ui.rows.innerHTML = '<div class="ps-empty">' + (psQuery
+                ? 'Sin resultados'
+                : (enCero ? 'No hay productos sin stock' : 'No hay productos por agotarse')) + '</div>';
+            return;
+        }
+
+        ui.rows.innerHTML = filtradas.map(function (f) {
+            const sub = psSub(f);
+            return '<div class="ps-row' + (f.n <= 0 ? ' zero' : '') + '">'
+                + '<div class="ps-main">'
+                + '<div class="ps-top"><span class="ps-linea">' + psEsc(f.linea || 'SIN LÍNEA') + '</span>'
+                + '<span class="ps-cod">' + psEsc(f.cod) + '</span></div>'
+                + '<div class="ps-name">' + psEsc(f.desc) + '</div>'
+                + '</div>'
+                + '<div class="ps-val">'
+                + '<div class="ps-val-line"><span class="ps-num">' + psEsc(fmtStock(f.n)) + '</span>'
+                + '<span class="ps-unit">' + psEsc(psUnidad(f)) + '</span></div>'
+                + (sub ? '<div class="ps-sub2">' + psEsc(sub) + '</div>' : '')
+                + '</div></div>';
+        }).join('');
+    }
+
+    function psRefresh() {
+        psConstruir();
+        psRender();
+    }
+
+    function psAbrir() {
+        const ui = psEls();
+        if (!psData.listo) return;
+        psTabActiva = psData.low.length ? 'low' : 'zero';
+        psQuery = '';
+        ui.search.value = '';
+        psRender();
+        ui.sheet.classList.add('open');
+        ui.overlay.classList.add('open');
+        ui.sheet.setAttribute('aria-hidden', 'false');
+        ui.fab.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('ps-lock');
+    }
+
+    function psCerrar() {
+        const ui = psEls();
+        ui.sheet.classList.remove('open');
+        ui.overlay.classList.remove('open');
+        ui.sheet.setAttribute('aria-hidden', 'true');
+        ui.fab.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('ps-lock');
+    }
+
+    (function psInit() {
+        const ui = psEls();
+        ui.fab.addEventListener('click', psAbrir);
+        ui.close.addEventListener('click', psCerrar);
+        ui.overlay.addEventListener('click', psCerrar);
+        ui.tabLow.addEventListener('click', function () { psTabActiva = 'low'; psRender(); });
+        ui.tabZero.addEventListener('click', function () { psTabActiva = 'zero'; psRender(); });
+        ui.search.addEventListener('input', function () { psQuery = ui.search.value; psRender(); });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && ui.sheet.classList.contains('open')) psCerrar();
+        });
+        psRender();
+    })();
 
     // =============================================================
     //  UTILIDADES
