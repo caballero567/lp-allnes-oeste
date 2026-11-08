@@ -382,6 +382,59 @@
     .ps-fab{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));}
   }
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+
+  /* ===== CONTADOR FLOTANTE DE VISITAS (ARRIBA DERECHA) ===== */
+  .ctr{position:fixed;z-index:62;right:max(12px,calc(50vw - 248px));top:12px;
+    display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:inherit;}
+  .ctr-card{display:flex;align-items:center;gap:9px;
+    background:linear-gradient(135deg,rgba(26,37,52,.98),rgba(12,18,27,.98));
+    border:1px solid rgba(96,165,250,.30);border-left:3px solid var(--accent);
+    border-radius:13px;padding:8px 9px 8px 10px;
+    box-shadow:0 14px 40px rgba(0,0,0,.58),0 0 22px rgba(59,130,246,.14),inset 0 1px 0 rgba(255,255,255,.06);
+    transform-origin:top right;animation:ctrIn .22s cubic-bezier(.22,1,.36,1);}
+  @keyframes ctrIn{from{opacity:0;transform:translateY(-6px) scale(.96);}to{opacity:1;transform:none;}}
+  .ctr-ico{width:31px;height:31px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(160deg,rgba(96,165,250,.24),rgba(59,130,246,.10));
+    color:var(--accent);font-size:12px;border:1px solid rgba(96,165,250,.32);}
+  .ctr-info{display:flex;flex-direction:column;gap:2px;line-height:1;padding-right:2px;}
+  .ctr-ttl{font-size:8.5px;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.9px;line-height:1;}
+  .ctr-btn{width:20px;height:20px;flex:0 0 auto;margin-left:1px;border-radius:50%;border:1px solid var(--border);
+    background:var(--surface-2);color:var(--text-2);display:grid;place-items:center;
+    font-size:9px;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .ctr-btn:hover{color:var(--text-1);border-color:var(--border-strong);}
+  .ctr-btn:active{transform:scale(.9);}
+  .ctr-visits b{font-family:var(--mono);font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--accent);line-height:1;}
+  .ctr-pill{display:none;align-items:center;gap:6px;border:none;border-radius:40px;
+    padding:6px 7px 6px 10px;cursor:pointer;font-family:inherit;color:#fff;
+    background:linear-gradient(135deg,var(--accent-strong),var(--accent));
+    box-shadow:0 10px 26px rgba(59,130,246,.4),inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .15s,filter .15s;}
+  .ctr-pill:hover{filter:brightness(1.08);}
+  .ctr-pill:active{transform:scale(.95);}
+  .ctr-pill > i{font-size:11px;}
+  .ctr-pill .n{display:grid;place-items:center;min-width:22px;height:20px;padding:0 6px;
+    border-radius:20px;font-family:var(--mono);font-size:10px;font-weight:800;
+    background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.35);}
+  .ctr.is-min .ctr-card{display:none;}
+  .ctr.is-min .ctr-pill{display:flex;}
+  @media (min-width:940px){.ctr{top:14px;right:14px;}}
+  @media (max-width:520px){
+    .ctr{top:12px;right:12px;}
+    .ctr-card{gap:7px;padding:7px 8px;border-radius:12px;}
+    .ctr-ico{width:27px;height:27px;border-radius:8px;font-size:11px;}
+    .ctr-info{padding-right:1px;}
+    .ctr-ttl{font-size:8px;letter-spacing:.7px;}
+    .ctr-visits b{font-size:19px;}
+    .ctr-btn{width:18px;height:18px;font-size:8px;margin-left:0;}
+  }
+  @media (max-width:340px){
+    .ctr{right:8px;}
+    .ctr-ico{display:none;}
+    .ctr-card{gap:5px;padding:7px 8px;}
+    .ctr-visits b{font-size:17px;}
+    .ctr-btn{width:17px;height:17px;}
+  }
+  @media (prefers-reduced-motion:reduce){.ctr-card{animation:none;}}
 </style>
 </head>
 <body>
@@ -493,6 +546,22 @@
     <div class="ps-list-h" id="psListH"><span>Más críticos primero</span><span>stock</span></div>
     <div id="psRows"></div>
   </div>
+</div>
+
+<!-- ===== CONTADOR FLOTANTE DE VISITAS (ARRIBA DERECHA) ===== -->
+<div class="ctr is-min" id="ctr" data-state="min">
+  <div class="ctr-card" id="ctrCard">
+    <div class="ctr-ico"><i class="fas fa-eye"></i></div>
+    <div class="ctr-info">
+      <div class="ctr-ttl">Visitas</div>
+      <div class="ctr-visits" aria-live="polite"><b id="ctrToday">0</b></div>
+    </div>
+    <button class="ctr-btn" id="ctrMin" type="button" title="Minimizar" aria-label="Minimizar contador"><i class="fas fa-minus"></i></button>
+  </div>
+  <button class="ctr-pill" id="ctrPill" type="button" title="Expandir contador de visitas" aria-label="Expandir contador de visitas">
+    <i class="fas fa-eye"></i>
+    <span class="n" id="ctrPillToday">0</span>
+  </button>
 </div>
 
 <!-- ===== MODAL: LISTA DE PRECIOS ===== -->
@@ -8468,6 +8537,115 @@
     console.log('Productos cargados:', productos.length);
     console.log('Precios cargados:', precios.length);
     console.log('Clientes cargados:', clientesRutas.length);
+</script>
+
+<!-- ===== CONTADOR FLOTANTE: LOGICA ===== -->
+<script>
+(function () {
+  var STATE_KEY = 'lpOesteCtrState';
+  var VISIT_KEY = 'lpOesteVisitDate';
+  var TZ = 'America/Lima';
+  var BASE = 'https://abacus.jasoncameron.dev';
+  var local = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])$/.test(location.hostname);
+  var NS = local ? 'lp-allnes-oeste-preview-v3' : 'lp-allnes-oeste-prod';
+
+  var ctr = document.getElementById('ctr');
+  var card = document.getElementById('ctrCard');
+  var pill = document.getElementById('ctrPill');
+  var btnMin = document.getElementById('ctrMin');
+  var todayEl = document.getElementById('ctrToday');
+  var pillToday = document.getElementById('ctrPillToday');
+  if (!ctr || !card || !pill) return;
+
+  function limaDate() {
+    try {
+      var p = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' })
+        .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+      if (p.year && p.month && p.day) return p.year + '-' + p.month + '-' + p.day;
+    } catch (e) { }
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function lsGet(k, def) {
+    try { var v = localStorage.getItem(k); return v == null ? def : (Number(v) || 0); } catch (e) { return def; }
+  }
+  function lsSet(k, v) { try { localStorage.setItem(k, String(v)); } catch (e) { } }
+
+  function api(path) {
+    return fetch(BASE + path, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  function getVal(key) {
+    return api('/get/' + NS + '/' + encodeURIComponent(key)).then(function (j) { return Number(j.value) || 0; });
+  }
+  function hitVal(key) {
+    return api('/hit/' + NS + '/' + encodeURIComponent(key)).then(function (j) { return Number(j.value) || 0; });
+  }
+
+  var todayKey = function () { return 'visitas-' + limaDate(); };
+  var localTodayKey = function () { return 'lpOesteLocalToday:' + limaDate(); };
+
+  function render(today) {
+    todayEl.textContent = today;
+    pillToday.textContent = today;
+  }
+
+  function fallback() {
+    render(lsGet(localTodayKey(), 0));
+  }
+
+  function refresh() {
+    return getVal(todayKey()).then(render).catch(fallback);
+  }
+
+  function countVisit() {
+    var date = limaDate();
+    var seen = false;
+    try { seen = localStorage.getItem(VISIT_KEY) === date; } catch (e) { }
+    if (seen) return refresh();
+
+    // Marcar antes de la llamada para no duplicar entre pestañas.
+    try { localStorage.setItem(VISIT_KEY, date); } catch (e) { }
+    var lt = lsGet(localTodayKey(), 0) + 1;
+    lsSet(localTodayKey(), lt);
+    render(lt);
+
+    return hitVal(todayKey()).then(render).catch(fallback);
+  }
+
+  function setState(st, persist) {
+    if (st !== 'open' && st !== 'min') st = 'min';
+    ctr.classList.toggle('is-min', st === 'min');
+    ctr.setAttribute('data-state', st);
+    if (persist) { try { localStorage.setItem(STATE_KEY, st); } catch (e) { } }
+  }
+
+  btnMin.addEventListener('click', function (e) { e.stopPropagation(); setState('min', true); });
+  pill.addEventListener('click', function () { setState('open', true); });
+
+  var saved = 'open';
+  try { saved = localStorage.getItem(STATE_KEY) || 'open'; } catch (e) { }
+  try {
+    var qp = new URLSearchParams(location.search).get('ctr');
+    if (qp === 'open' || qp === 'min') saved = qp;
+  } catch (e) { }
+  setState(saved, false);
+  fallback();
+  countVisit();
+
+  // Si el dia cambia con la pagina abierta, cuenta la nueva visita.
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState !== 'visible') return;
+    var seen = false;
+    try { seen = localStorage.getItem(VISIT_KEY) === limaDate(); } catch (e) { }
+    if (!seen) countVisit(); else refresh();
+  });
+  window.addEventListener('focus', refresh);
+})();
 </script>
 </body>
 </html>
