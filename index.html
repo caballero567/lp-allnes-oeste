@@ -8691,27 +8691,55 @@
       return r.json();
     });
   }
+  // La API publica falla de forma intermitente (500): reintenta antes de rendirse.
+  function apiRetry(path, tries) {
+    tries = tries || 3;
+    function attempt(n) {
+      return api(path).catch(function (err) {
+        if (n >= tries) throw err;
+        return new Promise(function (res) { setTimeout(res, 400 * n); }).then(function () { return attempt(n + 1); });
+      });
+    }
+    return attempt(1);
+  }
+  function valOf(j) { return Number(j && j.value) || 0; }
   function getVal(key) {
-    return api('/get/' + NS + '/' + encodeURIComponent(key)).then(function (j) { return Number(j.value) || 0; });
+    return apiRetry('/get/' + NS + '/' + encodeURIComponent(key)).then(valOf);
   }
   function hitVal(key) {
-    return api('/hit/' + NS + '/' + encodeURIComponent(key)).then(function (j) { return Number(j.value) || 0; });
+    return apiRetry('/hit/' + NS + '/' + encodeURIComponent(key)).then(valOf);
   }
 
   var todayKey = function () { return 'visitas-' + limaDate(); };
   var localTodayKey = function () { return 'lpOesteLocalToday:' + limaDate(); };
+  var cacheTodayKey = function () { return 'lpOesteCtrLast:' + limaDate(); };
 
   function render(today) {
     todayEl.textContent = today;
     pillToday.textContent = today;
   }
 
+  // Ultimo valor real conocido del contador (por dia).
+  function cacheGet() {
+    try {
+      var v = localStorage.getItem(cacheTodayKey());
+      return v == null ? null : (Number(v) || 0);
+    } catch (e) { return null; }
+  }
+  function cacheSet(v) { try { localStorage.setItem(cacheTodayKey(), String(v)); } catch (e) { } }
+
+  // Si la API falla, muestra el ultimo valor real (no el conteo local de 1).
   function fallback() {
-    render(lsGet(localTodayKey(), 0));
+    var c = cacheGet();
+    render(c == null ? lsGet(localTodayKey(), 0) : c);
   }
 
   function refresh() {
-    return getVal(todayKey()).then(render).catch(fallback);
+    return getVal(todayKey()).then(function (v) {
+      cacheSet(v);
+      render(v);
+      return v;
+    }).catch(fallback);
   }
 
   function countVisit() {
@@ -8724,9 +8752,13 @@
     try { localStorage.setItem(VISIT_KEY, date); } catch (e) { }
     var lt = lsGet(localTodayKey(), 0) + 1;
     lsSet(localTodayKey(), lt);
-    render(lt);
+    render(cacheGet() == null ? lt : cacheGet());
 
-    return hitVal(todayKey()).then(render).catch(fallback);
+    return hitVal(todayKey()).then(function (v) {
+      cacheSet(v);
+      render(v);
+      return v;
+    }).catch(refresh);
   }
 
   function setState(st, persist) {
@@ -8748,6 +8780,9 @@
   setState(saved, false);
   fallback();
   countVisit();
+
+  // Refresco periodico: corrige el numero si la API fallo al cargar.
+  setInterval(refresh, 60000);
 
   // Si el dia cambia con la pagina abierta, cuenta la nueva visita.
   document.addEventListener('visibilitychange', function () {
