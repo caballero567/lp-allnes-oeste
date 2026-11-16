@@ -7684,7 +7684,7 @@
         const sc = stockDeProducto(p);
         const n = sc ? Number(sc.n) : NaN;
         if (!sc || !isFinite(n) || n <= 0) {
-            return '<div class="stock-row"><span class="stock-pill cero"><i class="fas fa-box-open"></i> Sin stock</span></div>';
+            return '<div class="stock-row"><span class="stock-pill cero"><i class="fas fa-box-open"></i> SIN STOCK</span></div>';
         }
         const u = sc.u ? sc.u + ' ' : '';
         return '<div class="stock-row"><span class="stock-pill"><i class="fas fa-boxes"></i> ' + u + fmtStock(n) + '</span><span class="stock-lbl">Disponible</span></div>';
